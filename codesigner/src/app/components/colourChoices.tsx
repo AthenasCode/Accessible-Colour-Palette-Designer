@@ -5,7 +5,6 @@ import styles from "../page.module.css";
 import { useEffect, useState } from "react";
 import contrast from "../utils/colourContrastCalculator";
 import { hexToRgba } from "@uiw/color-convert";
-import ColorCombo from "./colorCombo";
 import Combinations from "./combinations";
 
 export default function ColourChoices() {
@@ -15,10 +14,8 @@ export default function ColourChoices() {
   const [colour4, setColour4] = useState("#df9d87");
   const [colour5, setColour5] = useState("#fbdeae");
   const [colour6, setColour6] = useState("#efe7d4");
-  // const [colourCombinations, setColourCombinations] = useState([]);
   const [aaa, setAaa] = useState([]);
   const [aa, setAa] = useState([]);
-  const [displayLowContrast, setDisplayLowContrast] = useState(false);
 
   const [lowContrast, setLowContrast] = useState([]);
 
@@ -50,10 +47,22 @@ export default function ColourChoices() {
         combinations.push([rgb1, rgb2, contrastValue]);
       }
     }
+
+    console.log(combinations);
+
+    // Swap colours in each combination (to account for background/text swaps)
+    combinations.map((combo) => {
+      const colour1 = combo[0];
+      const colour2 = combo[1];
+      const contrast = combo[2];
+
+      combinations.push([colour2, colour1, contrast]);
+    });
+
     combinations.sort((a, b) => b[2] - a[2]); // negative if a < b, positive if a > b
+
     const aaa = combinations.filter((c) => c[2] >= 4.5);
     const aa = combinations.filter((c) => c[2] < 4.5 && c[2] >= 3);
-
     const lowContrast = combinations.filter((c) => c[2] < 3);
 
     setAaa(aaa);
