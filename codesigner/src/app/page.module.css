@@ -1,5 +1,5 @@
 .main {
-  width: 1000px;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,39 +8,74 @@
   margin: auto;
 }
 
+.pageContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .colourChoices {
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .colorPickerSection {
   position: relative;
 }
 
+.combinationsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .colorPicker {
   position: absolute;
   left: 0;
+  z-index: 10;
 }
 
 .colourCombos {
   display: flex;
+  gap: 0.5rem;
 }
 
 .colorDisplay {
-  width: 100px;
-  height: 100px;
+  width: var(--cube-width);
+  aspect-ratio: 1/1;
 }
 
 .colorCombinationDisplay {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.5rem;
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: var(--cube-width);
+  aspect-ratio: 1/1;
 }
 
 .contrast {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 0.2rem;
+  right: 0.2rem;
+}
+
+.largeText {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.normalText {
+  font-size: 14px;
+}
+
+.nonText {
+  width: 10%;
+  min-width: 10px;
+  border-radius: 50%;
+  background-color: white;
 }

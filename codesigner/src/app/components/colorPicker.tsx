@@ -19,7 +19,7 @@ export interface SketchProps
   onChange?: (newShade: ColorResult) => void;
 }
 
-export default function Demo({ hex, setHex }) {
+export default function ColorPicker({ hex, setHex }) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import Demo from "./demo";
+import ColorPicker from "./colorPicker";
 import styles from "../page.module.css";
 import { useEffect, useState } from "react";
 import contrast from "../utils/colourContrastCalculator";
@@ -29,7 +29,7 @@ export default function ColourChoices() {
 
   useEffect(() => {
     // Convert hex to rgb:
-    const hexColours = [colour1, colour2, colour3, colour4, colour5];
+    const hexColours = [colour1, colour2, colour3, colour4, colour5, colour6];
     const rgbColours = [];
     hexColours.map((colour) => {
       const { r: r, g: g, b: b } = hexToRgba(colour);
@@ -62,18 +62,20 @@ export default function ColourChoices() {
   }, [colour1, colour2, colour3, colour4, colour5]);
 
   return (
-    <section>
+    <section className={styles.pageContent}>
       <section className={styles.colourChoices}>
-        <Demo hex={colour1} setHex={setColour1} />
-        <Demo hex={colour2} setHex={setColour2} />
-        <Demo hex={colour3} setHex={setColour3} />
-        <Demo hex={colour4} setHex={setColour4} />
-        <Demo hex={colour5} setHex={setColour5} />
-        <Demo hex={colour6} setHex={setColour6} />
+        <ColorPicker hex={colour1} setHex={setColour1} />
+        <ColorPicker hex={colour2} setHex={setColour2} />
+        <ColorPicker hex={colour3} setHex={setColour3} />
+        <ColorPicker hex={colour4} setHex={setColour4} />
+        <ColorPicker hex={colour5} setHex={setColour5} />
+        <ColorPicker hex={colour6} setHex={setColour6} />
       </section>
-      <Combinations contrastLevel={"AAA"} colorArray={aaa} />
-      <Combinations contrastLevel={"AA"} colorArray={aa} />
-      <Combinations contrastLevel={"Low"} colorArray={lowContrast} />
+      <section className={styles.combinationsSection}>
+        <Combinations contrastLevel={"AAA"} colorArray={aaa} />
+        <Combinations contrastLevel={"AA"} colorArray={aa} />
+        <Combinations contrastLevel={"Low"} colorArray={lowContrast} />
+      </section>
     </section>
   );
 }
