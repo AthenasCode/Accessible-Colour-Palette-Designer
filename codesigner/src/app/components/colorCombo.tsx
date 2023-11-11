@@ -15,11 +15,11 @@ export default function ColorCombo({
       >
         {contrast > 4.5 && contrastLevel === "AAA" ? (
           <>
-            <p className={styles.largeText}>Large scale</p>
+            <p className={styles.largeText}>Large</p>
           </>
         ) : contrast > 3 && contrastLevel === "AA" ? (
           <>
-            <p className={styles.largeText}>Large scale</p>
+            <p className={styles.largeText}>Large</p>
             <svg height="100" width="100">
               <circle
                 cx="15"
