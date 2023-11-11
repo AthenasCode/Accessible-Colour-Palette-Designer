@@ -7,7 +7,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-primary: 110, 76, 114;
+    --background-primary: 243, 243, 243;
     --text-primary: 0, 0, 0;
   }
 }
