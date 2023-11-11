@@ -19,15 +19,27 @@ export interface SketchProps
   onChange?: (newShade: ColorResult) => void;
 }
 
-export default function ColorPicker({ hex, setHex }) {
+export default function ColorPicker({
+  hex,
+  setHex,
+  excludeAsBackground,
+  setExcludeAsBackground,
+  excludeAsText,
+  setExcludeAsText,
+}) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
+
+  const checkBackgroundHandler = () => {
+    setExcludeAsBackground(!excludeAsBackground);
+  };
+
+  const checkTextHandler = () => {
+    setExcludeAsText(!excludeAsText);
+  };
 
   return (
     <section className={styles.colorPickerSection}>
       <ChosenColour color={hex} />
-      <button onClick={() => setDisplayColorPicker((prev) => !prev)}>
-        {displayColorPicker ? "Done" : "Edit color"}
-      </button>
       <div
         className={styles.colorPicker}
         style={{ display: displayColorPicker ? "block" : "none" }}
@@ -40,6 +52,27 @@ export default function ColorPicker({ hex, setHex }) {
           disableAlpha="true"
         />
       </div>
+      <section className={styles.colourPickerButtons}>
+        <button onClick={() => setDisplayColorPicker((prev) => !prev)}>
+          {displayColorPicker ? "Done" : "Edit color"}
+        </button>
+        <label htmlFor="">
+          <input
+            type="checkbox"
+            checked={excludeAsBackground}
+            onChange={checkBackgroundHandler}
+          />
+          Exclude as background
+        </label>
+        <label htmlFor="">
+          <input
+            type="checkbox"
+            checked={excludeAsText}
+            onChange={checkTextHandler}
+          />
+          Exclude as text
+        </label>
+      </section>
     </section>
   );
 }

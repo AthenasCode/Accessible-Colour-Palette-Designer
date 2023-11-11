@@ -16,13 +16,10 @@ export default function ColourChoices() {
   const [colour6, setColour6] = useState("#efe7d4");
   const [aaa, setAaa] = useState([]);
   const [aa, setAa] = useState([]);
+  const [excludeAsBackground, setExcludeAsBackground] = useState(false);
+  const [excludeAsText, setExcludeAsText] = useState(false);
 
   const [lowContrast, setLowContrast] = useState([]);
-
-  const { r: r1, g: g1, b: b1 } = hexToRgba(colour1);
-  const rgb1 = [r1, g1, b1];
-  const { r: r2, g: g2, b: b2 } = hexToRgba(colour2);
-  const rgb2 = [r2, g2, b2];
 
   useEffect(() => {
     // Convert hex to rgb:
@@ -41,10 +38,12 @@ export default function ColourChoices() {
     // Iterate over rgbColours, calculating contrasts
     for (let i = 0; i < rgbColours.length - 1; i++) {
       for (let j = i + 1; j < rgbColours.length; j++) {
-        const rgb1 = rgbColours[i];
-        const rgb2 = rgbColours[j];
-        const contrastValue = contrast(rgb1, rgb2).toFixed(2);
-        combinations.push([rgb1, rgb2, contrastValue]);
+        const rgbBg = rgbColours[i];
+        const rgbTxt = rgbColours[j];
+        const hexBg = hexColours[i];
+        const hexTxt = hexColours[j];
+        const contrastValue = contrast(rgbBg, rgbTxt).toFixed(2);
+        combinations.push([[rgbBg, hexBg], [rgbTxt, hexTxt], contrastValue]);
       }
     }
 
@@ -64,21 +63,32 @@ export default function ColourChoices() {
     const aaa = combinations.filter((c) => c[2] >= 4.5);
     const aa = combinations.filter((c) => c[2] < 4.5 && c[2] >= 3);
     const lowContrast = combinations.filter((c) => c[2] < 3);
-
+    console.log("combinations", combinations);
     setAaa(aaa);
     setAa(aa);
     setLowContrast(lowContrast);
-  }, [colour1, colour2, colour3, colour4, colour5]);
+  }, [colour1, colour2, colour3, colour4, colour5, colour6]);
 
   return (
     <section className={styles.pageContent}>
       <section className={styles.colourChoices}>
-        <ColorPicker hex={colour1} setHex={setColour1} />
+        <ColorPicker
+          hex={colour1}
+          setHex={setColour1}
+          excludeAsBackground={excludeAsBackground}
+          setExcludeAsBackground={setExcludeAsBackground}
+          excludeAsText={excludeAsText}
+          setExcludeAsText={setExcludeAsText}
+        />
         <ColorPicker hex={colour2} setHex={setColour2} />
         <ColorPicker hex={colour3} setHex={setColour3} />
         <ColorPicker hex={colour4} setHex={setColour4} />
         <ColorPicker hex={colour5} setHex={setColour5} />
         <ColorPicker hex={colour6} setHex={setColour6} />
+        <h2>Colours:</h2>
+        <p>
+          {colour1}, {colour2}, {colour3}, {colour4}, {colour5}, {colour6}
+        </p>
       </section>
       <section className={styles.combinationsSection}>
         <Combinations contrastLevel={"AAA"} colorArray={aaa} />

@@ -4,6 +4,8 @@ import { rgbaToHex } from "@uiw/color-convert";
 export default function ColorCombo({
   colour1,
   colour2,
+  hex1,
+  hex2,
   contrast,
   contrastLevel,
 }) {
@@ -20,13 +22,13 @@ export default function ColorCombo({
         ) : contrast > 3 && contrastLevel === "AA" ? (
           <>
             <p className={styles.largeText}>Large</p>
-            <svg height="100" width="100">
+            <svg height="30" width="30">
               <circle
                 cx="15"
                 cy="15"
                 r="10"
                 stroke={`${colour2}`}
-                stroke-width="3"
+                strokeWidth="3"
                 fill={`${colour2}`}
               />
             </svg>
@@ -43,11 +45,17 @@ export default function ColorCombo({
         )}
         <p className={styles.contrast}>{contrast}</p>
       </div>
-      <h4>Info:</h4>
-      <h5>Background colour:</h5>
-      <p>{colour1}</p>
-      <h5>Text colour:</h5>
-      <p>{colour2}</p>
+      <h4 className={styles.visuallyHidden}>Info:</h4>
+      <h5>Background:</h5>
+      <p>
+        {colour1} <br />
+        {hex1}
+      </p>
+      <h5>Text:</h5>
+      <p>
+        {colour2} <br />
+        {hex2}
+      </p>
     </section>
   );
 }

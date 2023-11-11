@@ -19,6 +19,3 @@ export default function contrast(rgb1, rgb2) {
   var darkest = Math.min(lum1, lum2);
   return (brightest + 0.05) / (darkest + 0.05);
 }
-
-console.log(contrast([255, 255, 255], [255, 255, 0])); // 1.074 for yellow
-console.log(contrast([255, 255, 255], [0, 0, 255])); // 8.592 for blue

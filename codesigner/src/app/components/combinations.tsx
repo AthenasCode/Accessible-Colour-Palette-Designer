@@ -37,11 +37,14 @@ export default function Combinations({ colorArray, contrastLevel }) {
       <section className={styles.colourCombos}>
         {contrastLevel === "Low" && !displayLowContrast
           ? ""
-          : colorArray.map((combo) => {
+          : colorArray.map((combo, index) => {
               return (
                 <ColorCombo
-                  colour1={`rgb(${combo[0]})`}
-                  colour2={`rgb(${combo[1]})`}
+                  key={index}
+                  colour1={`rgb(${combo[0][0]})`}
+                  colour2={`rgb(${combo[1][0]})`}
+                  hex1={combo[0][1]}
+                  hex2={combo[1][1]}
                   contrast={`${combo[2]}`}
                   contrastLevel={contrastLevel}
                 />
