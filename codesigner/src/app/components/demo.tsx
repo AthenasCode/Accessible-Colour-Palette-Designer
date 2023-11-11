@@ -2,8 +2,6 @@
 
 import { Sketch } from "@uiw/react-color";
 
-import { useState } from "react";
-
 export default function Demo({ hex, setHex }) {
   return (
     <Sketch
