@@ -6,7 +6,6 @@
   padding: 6rem;
   min-height: 100vh;
   margin: auto;
-  border: 1px solid red;
 }
 
 .colourChoices {
@@ -14,6 +13,15 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.colorPickerSection {
+  position: relative;
+}
+
+.colorPicker {
+  position: absolute;
+  left: 0;
 }
 
 .colourCombos {
@@ -26,6 +34,13 @@
 }
 
 .colorCombinationDisplay {
+  position: relative;
   width: 100px;
-  height: 200px;
+  height: 100px;
+}
+
+.contrast {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

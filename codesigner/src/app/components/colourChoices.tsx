@@ -6,18 +6,20 @@ import { useEffect, useState } from "react";
 import contrast from "../utils/colourContrastCalculator";
 import { hexToRgba } from "@uiw/color-convert";
 import ColorCombo from "./colorCombo";
+import Combinations from "./combinations";
 
 export default function ColourChoices() {
-  const [colour1, setColour1] = useState("#475F64");
-  const [colour2, setColour2] = useState("#5C2424");
-  const [colour3, setColour3] = useState("#506969");
-  const [colour4, setColour4] = useState("#203A26");
-  const [colour5, setColour5] = useState("#919296");
-  const [colour6, setColour6] = useState("#919296");
+  const [colour1, setColour1] = useState("#0d1635");
+  const [colour2, setColour2] = useState("#393f59");
+  const [colour3, setColour3] = useState("#337a7e");
+  const [colour4, setColour4] = useState("#df9d87");
+  const [colour5, setColour5] = useState("#fbdeae");
+  const [colour6, setColour6] = useState("#efe7d4");
   // const [colourCombinations, setColourCombinations] = useState([]);
   const [aaa, setAaa] = useState([]);
   const [aa, setAa] = useState([]);
-  const [aaNonText, setAaNonText] = useState([]);
+  const [displayLowContrast, setDisplayLowContrast] = useState(false);
+
   const [lowContrast, setLowContrast] = useState([]);
 
   const { r: r1, g: g1, b: b1 } = hexToRgba(colour1);
@@ -50,13 +52,12 @@ export default function ColourChoices() {
     }
     combinations.sort((a, b) => b[2] - a[2]); // negative if a < b, positive if a > b
     const aaa = combinations.filter((c) => c[2] >= 4.5);
-    const aa = combinations.filter((c) => c[2] < 4.5 && c[2] > 3);
-    const aaNonText = combinations.filter((c) => c[2] === 3);
+    const aa = combinations.filter((c) => c[2] < 4.5 && c[2] >= 3);
+
     const lowContrast = combinations.filter((c) => c[2] < 3);
 
     setAaa(aaa);
     setAa(aa);
-    setAaNonText(aaNonText);
     setLowContrast(lowContrast);
   }, [colour1, colour2, colour3, colour4, colour5]);
 
@@ -70,63 +71,9 @@ export default function ColourChoices() {
         <Demo hex={colour5} setHex={setColour5} />
         <Demo hex={colour6} setHex={setColour6} />
       </section>
-      <h2>AAA normal/large text</h2>
-      <p>(contrast greater than 4.5 : 1)</p>
-      <section className={styles.colourCombos}>
-        {aaa.map((combo) => {
-          return (
-            <ColorCombo
-              colour1={`rgb(${combo[0]})`}
-              colour2={`rgb(${combo[1]})`}
-              contrast={`${combo[2]}`}
-            />
-          );
-        })}
-      </section>
-
-      <h2>AA normal/large text</h2>
-      <p>(contrast between 3 : 1 and 4.5 : 1)</p>
-      <section className={styles.colourCombos}>
-        {aa.map((combo) => {
-          return (
-            <ColorCombo
-              colour1={`rgb(${combo[0]})`}
-              colour2={`rgb(${combo[1]})`}
-              contrast={`${combo[2]}`}
-            />
-          );
-        })}
-      </section>
-
-      <h2>AA non-text: 3 : 1</h2>
-      <p>(Combinations at 3 : 1)</p>
-      <section className={styles.colourCombos}>
-        {aaNonText.map((combo) => {
-          return (
-            <ColorCombo
-              colour1={`rgb(${combo[0]})`}
-              colour2={`rgb(${combo[1]})`}
-              contrast={`${combo[2]}`}
-            />
-          );
-        })}
-      </section>
-
-      <h2>Low contrast combinations</h2>
-      <p>(combinations less than 3 : 1)</p>
-      <section className={styles.colourCombos}>
-        {lowContrast.map((combo) => {
-          return (
-            <ColorCombo
-              colour1={`rgb(${combo[0]})`}
-              colour2={`rgb(${combo[1]})`}
-              contrast={`${combo[2]}`}
-            />
-          );
-        })}
-      </section>
-
-      <button>(hide low contrast combinations)</button>
+      <Combinations contrastLevel={"AAA"} colorArray={aaa} />
+      <Combinations contrastLevel={"AA"} colorArray={aa} />
+      <Combinations contrastLevel={"Low"} colorArray={lowContrast} />
     </section>
   );
 }

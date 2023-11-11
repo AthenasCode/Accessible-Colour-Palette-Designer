@@ -6,6 +6,7 @@ import { HsvaColor, ColorResult } from "@uiw/color-convert";
 import { SwatchPresetColor } from "@uiw/react-color-swatch";
 import ChosenColour from "./chosenColour";
 import { useState } from "react";
+import styles from "../page.module.css";
 
 export interface SketchProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "color"> {
@@ -22,16 +23,16 @@ export default function Demo({ hex, setHex }) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   return (
-    <>
+    <section className={styles.colorPickerSection}>
       <ChosenColour color={hex} />
       <button onClick={() => setDisplayColorPicker((prev) => !prev)}>
-        Edit color
+        {displayColorPicker ? "Done" : "Edit color"}
       </button>
-      <div style={{ display: displayColorPicker ? "block" : "none" }}>
+      <div
+        className={styles.colorPicker}
+        style={{ display: displayColorPicker ? "block" : "none" }}
+      >
         <Sketch
-          style={{
-            marginLeft: 20,
-          }}
           color={hex}
           onChange={(color) => {
             setHex(color.hex);
@@ -39,6 +40,6 @@ export default function Demo({ hex, setHex }) {
           disableAlpha="true"
         />
       </div>
-    </>
+    </section>
   );
 }
