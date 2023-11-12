@@ -40,13 +40,23 @@ export default function Combinations({ colorArray, contrastLevel }) {
           : colorArray.map((combo, index) => {
               console.log("mapping colorArray", combo);
 
+              const backgroundRgb = combo[0][0].rgb;
+              const textRgb = combo[1][0].rgb;
+              const backgroundHex = combo[0][1].color;
+              const textHex = combo[1][1].color;
+
+              // Check if either background or text should be rendered
+              if (!combo[0][0].background || !combo[1][0].text) {
+                return null; // Skip rendering if either condition is false
+              }
+
               return (
                 <ColorCombo
                   key={index}
-                  colour1={`rgb(${combo[0][0].rgb})`}
-                  colour2={`rgb(${combo[1][0].rgb})`}
-                  hex1={combo[0][1].color}
-                  hex2={combo[1][1].color}
+                  colour1={`rgb(${backgroundRgb})`}
+                  colour2={`rgb(${textRgb})`}
+                  hex1={backgroundHex.color}
+                  hex2={textHex.color}
                   contrast={`${combo[2]}`}
                   contrastLevel={contrastLevel}
                 />
