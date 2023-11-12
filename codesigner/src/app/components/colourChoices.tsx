@@ -9,32 +9,32 @@ import Combinations from "./combinations";
 
 export default function ColourChoices() {
   const [colour1, setColour1] = useState({
-    color: "#0d1635",
+    color: "#0D1635",
     background: true,
     text: true,
   });
   const [colour2, setColour2] = useState({
-    color: "#0d1635",
+    color: "#0A0C18",
     background: true,
     text: true,
   });
   const [colour3, setColour3] = useState({
-    color: "#0d1635",
+    color: "#393F59",
     background: true,
     text: true,
   });
   const [colour4, setColour4] = useState({
-    color: "#0d1635",
+    color: "#DF9D87",
     background: true,
     text: true,
   });
   const [colour5, setColour5] = useState({
-    color: "#0d1635",
+    color: "#337A7E",
     background: true,
     text: true,
   });
   const [colour6, setColour6] = useState({
-    color: "#0d1635",
+    color: "#FBDEAE",
     background: true,
     text: true,
   });
