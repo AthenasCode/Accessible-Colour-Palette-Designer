@@ -23,18 +23,16 @@ export default function ColorPicker({
   hex,
   setHex,
   excludeAsBackground,
-  setExcludeAsBackground,
   excludeAsText,
-  setExcludeAsText,
 }) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
   const checkBackgroundHandler = () => {
-    setExcludeAsBackground(!excludeAsBackground);
+    setHex((prev) => ({ ...prev, background: !prev.background }));
   };
 
   const checkTextHandler = () => {
-    setExcludeAsText(!excludeAsText);
+    setHex((prev) => ({ ...prev, text: !prev.text }));
   };
 
   return (
@@ -47,7 +45,7 @@ export default function ColorPicker({
         <Sketch
           color={hex}
           onChange={(color) => {
-            setHex(color.hex);
+            setHex((prev) => ({ ...prev, color: color.hex }));
           }}
           disableAlpha="true"
         />
@@ -59,7 +57,7 @@ export default function ColorPicker({
         <label htmlFor="">
           <input
             type="checkbox"
-            checked={excludeAsBackground}
+            checked={!excludeAsBackground}
             onChange={checkBackgroundHandler}
           />
           Exclude as background
@@ -67,7 +65,7 @@ export default function ColorPicker({
         <label htmlFor="">
           <input
             type="checkbox"
-            checked={excludeAsText}
+            checked={!excludeAsText}
             onChange={checkTextHandler}
           />
           Exclude as text
@@ -76,3 +74,15 @@ export default function ColorPicker({
     </section>
   );
 }
+
+[
+  [
+    { rgb: [1, 2, 3], background: true, text: true },
+    { color: "#000000", background: true, text: true },
+  ],
+  [
+    { rgb: [1, 2, 3], background: true, text: true },
+    { color: "#000000", background: true, text: true },
+  ],
+  "1",
+];

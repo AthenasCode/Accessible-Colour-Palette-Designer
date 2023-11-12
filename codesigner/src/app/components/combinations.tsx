@@ -38,13 +38,15 @@ export default function Combinations({ colorArray, contrastLevel }) {
         {contrastLevel === "Low" && !displayLowContrast
           ? ""
           : colorArray.map((combo, index) => {
+              console.log("mapping colorArray", combo);
+
               return (
                 <ColorCombo
                   key={index}
-                  colour1={`rgb(${combo[0][0]})`}
-                  colour2={`rgb(${combo[1][0]})`}
-                  hex1={combo[0][1]}
-                  hex2={combo[1][1]}
+                  colour1={`rgb(${combo[0][0].rgb})`}
+                  colour2={`rgb(${combo[1][0].rgb})`}
+                  hex1={combo[0][1].color}
+                  hex2={combo[1][1].color}
                   contrast={`${combo[2]}`}
                   contrastLevel={contrastLevel}
                 />
