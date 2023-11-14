@@ -5,7 +5,6 @@ import Description from "./description";
 
 export default function Combinations({ colorArray, contrastLevel }) {
   const [displayLowContrast, setDisplayLowContrast] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
 
   return (
     <section>
@@ -24,16 +23,11 @@ export default function Combinations({ colorArray, contrastLevel }) {
               ? "(hide)"
               : `(show ${colorArray.length} combinations)`}
           </button>
-          <button onClick={() => setShowInfo((prev) => !prev)}>
-            {showInfo ? "hide info" : "show info"}
-          </button>
         </>
       ) : (
-        <button onClick={() => setShowInfo((prev) => !prev)}>
-          {showInfo ? "hide info" : "show info"}
-        </button>
+        <></>
       )}
-      {showInfo && <Description contrastLevel={contrastLevel} />}
+      <Description contrastLevel={contrastLevel} />
       <section className={styles.colourCombos}>
         {contrastLevel === "Low" && !displayLowContrast
           ? ""
@@ -42,6 +36,13 @@ export default function Combinations({ colorArray, contrastLevel }) {
               const textRgb = combo[1][0].rgb;
               const backgroundHex = combo[0][1].color;
               const textHex = combo[1][1].color;
+              const contrast = combo[2];
+
+              console.log("contrast", contrast);
+              console.log(
+                "type of contrast before passing to ColorCombo",
+                typeof contrast
+              );
 
               // Check if either background or text should be rendered
               if (!combo[0][0].background || !combo[1][0].text) {
@@ -55,7 +56,7 @@ export default function Combinations({ colorArray, contrastLevel }) {
                   colour2={`rgb(${textRgb})`}
                   hex1={backgroundHex}
                   hex2={textHex}
-                  contrast={`${combo[2]}`}
+                  contrast={contrast}
                   contrastLevel={contrastLevel}
                 />
               );

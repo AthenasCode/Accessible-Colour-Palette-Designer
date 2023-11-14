@@ -90,7 +90,7 @@ export default function ColorChoices() {
         const rgbTxt: RgbColor = rgbColours[j]; // next colour after i
         const hexBg: HexColor = hexColours[i];
         const hexTxt: HexColor = hexColours[j];
-        const contrastValue: number = contrast(rgbBg, rgbTxt).toFixed(2);
+        const contrastValue: number = contrast(rgbBg, rgbTxt);
         combinations.push([[rgbBg, hexBg], [rgbTxt, hexTxt], contrastValue]);
       }
     }

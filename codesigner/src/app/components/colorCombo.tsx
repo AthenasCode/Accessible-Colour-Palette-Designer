@@ -1,5 +1,14 @@
 import styles from "../page.module.css";
 
+interface ColorComboProps {
+  colour1: string;
+  colour2: string;
+  hex1: string;
+  hex2: string;
+  contrast: number;
+  contrastLevel: string;
+}
+
 export default function ColorCombo({
   colour1,
   colour2,
@@ -7,7 +16,7 @@ export default function ColorCombo({
   hex2,
   contrast,
   contrastLevel,
-}) {
+}: ColorComboProps) {
   return (
     <section className={styles.colorCombinationWrapper}>
       <div
