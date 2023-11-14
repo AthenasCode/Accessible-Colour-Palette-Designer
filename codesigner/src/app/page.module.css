@@ -39,7 +39,7 @@
   position: relative;
 }
 
-.colourPickerButtons {
+.colourEditingTools {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -81,6 +81,7 @@
 }
 
 .contrast {
+  font-size: 18px;
   position: absolute;
   bottom: 0.2rem;
   right: 0.2rem;

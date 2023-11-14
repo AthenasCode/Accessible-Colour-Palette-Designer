@@ -26,6 +26,7 @@ export default function ColorPicker({
   excludeAsText,
 }) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [inputValue, setInputValue] = useState(hex);
 
   const checkBackgroundHandler = () => {
     setHex((prev) => ({ ...prev, background: !prev.background }));
@@ -33,6 +34,11 @@ export default function ColorPicker({
 
   const checkTextHandler = () => {
     setHex((prev) => ({ ...prev, text: !prev.text }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setHex((prev) => ({ ...prev, color: inputValue }));
   };
 
   return (
@@ -46,13 +52,25 @@ export default function ColorPicker({
           color={hex}
           onChange={(color) => {
             setHex((prev) => ({ ...prev, color: color.hex }));
+            setInputValue(color.hex);
           }}
           disableAlpha="true"
         />
       </div>
-      <section className={styles.colourPickerButtons}>
+      <section className={styles.colourEditingTools}>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <label htmlFor="">
+            Input hex:{" "}
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
         <button onClick={() => setDisplayColorPicker((prev) => !prev)}>
-          {displayColorPicker ? "Done" : "Edit color"}
+          {displayColorPicker ? "Done" : "Edit with colour picker"}
         </button>
         <label htmlFor="">
           <input
@@ -74,15 +92,3 @@ export default function ColorPicker({
     </section>
   );
 }
-
-[
-  [
-    { rgb: [1, 2, 3], background: true, text: true },
-    { color: "#000000", background: true, text: true },
-  ],
-  [
-    { rgb: [1, 2, 3], background: true, text: true },
-    { color: "#000000", background: true, text: true },
-  ],
-  "1",
-];

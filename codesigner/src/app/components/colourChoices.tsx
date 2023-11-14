@@ -137,6 +137,15 @@ export default function ColourChoices() {
           {colour1.color}, {colour2.color}, {colour3.color}, {colour4.color},{" "}
           {colour5.color}, {colour6.color}
         </p>
+        <h2>Tips for light themes:</h2>
+        <ol>
+          <li>
+            Choose two desaturated dark colours (options for primary text)
+          </li>
+          <li>Choose one desaturated dark colour (alternative text)</li>
+          <li>Choose two desaturated light colours (for backgrounds)</li>
+          <li>Choose one saturated accent colour (exclude as background)</li>
+        </ol>
       </section>
       <section className={styles.combinationsSection}>
         <Combinations contrastLevel={"AAA"} colorArray={aaa} />

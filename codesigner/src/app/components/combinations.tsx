@@ -45,6 +45,8 @@ export default function Combinations({ colorArray, contrastLevel }) {
               const backgroundHex = combo[0][1].color;
               const textHex = combo[1][1].color;
 
+              console.log("backgroundHex", backgroundHex);
+
               // Check if either background or text should be rendered
               if (!combo[0][0].background || !combo[1][0].text) {
                 return null; // Skip rendering if either condition is false
@@ -55,8 +57,8 @@ export default function Combinations({ colorArray, contrastLevel }) {
                   key={index}
                   colour1={`rgb(${backgroundRgb})`}
                   colour2={`rgb(${textRgb})`}
-                  hex1={backgroundHex.color}
-                  hex2={textHex.color}
+                  hex1={backgroundHex}
+                  hex2={textHex}
                   contrast={`${combo[2]}`}
                   contrastLevel={contrastLevel}
                 />

@@ -9,6 +9,8 @@ export default function ColorCombo({
   contrast,
   contrastLevel,
 }) {
+  console.log("hex1", hex1);
+
   return (
     <section className={styles.colorCombinationWrapper}>
       <div
