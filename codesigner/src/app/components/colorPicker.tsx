@@ -23,18 +23,32 @@ export default function ColorPicker({
   hex,
   setHex,
   excludeAsBackground,
-  setExcludeAsBackground,
   excludeAsText,
-  setExcludeAsText,
 }) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [inputValue, setInputValue] = useState(hex);
 
   const checkBackgroundHandler = () => {
-    setExcludeAsBackground(!excludeAsBackground);
+    setHex((prev) => ({ ...prev, background: !prev.background }));
   };
 
   const checkTextHandler = () => {
-    setExcludeAsText(!excludeAsText);
+    setHex((prev) => ({ ...prev, text: !prev.text }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate if the input is a valid hex code
+    if (/^#([0-9A-F]{3}){1,2}$/i.test(inputValue)) {
+      // Process the valid hex code
+      console.log("Valid hex code:", inputValue);
+      setHex((prev) => ({ ...prev, color: inputValue }));
+    } else {
+      // Handle the case when the input is not a valid hex code
+      window.alert("Error: Invalid hex code");
+      setInputValue(hex);
+    }
   };
 
   return (
@@ -47,19 +61,31 @@ export default function ColorPicker({
         <Sketch
           color={hex}
           onChange={(color) => {
-            setHex(color.hex);
+            setHex((prev) => ({ ...prev, color: color.hex }));
+            setInputValue(color.hex);
           }}
           disableAlpha="true"
         />
       </div>
-      <section className={styles.colourPickerButtons}>
+      <section className={styles.colourEditingTools}>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <label htmlFor="">
+            Input hex:{" "}
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
         <button onClick={() => setDisplayColorPicker((prev) => !prev)}>
-          {displayColorPicker ? "Done" : "Edit color"}
+          {displayColorPicker ? "Done" : "Edit with colour picker"}
         </button>
         <label htmlFor="">
           <input
             type="checkbox"
-            checked={excludeAsBackground}
+            checked={!excludeAsBackground}
             onChange={checkBackgroundHandler}
           />
           Exclude as background
@@ -67,7 +93,7 @@ export default function ColorPicker({
         <label htmlFor="">
           <input
             type="checkbox"
-            checked={excludeAsText}
+            checked={!excludeAsText}
             onChange={checkTextHandler}
           />
           Exclude as text

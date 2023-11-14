@@ -1,5 +1,13 @@
 import styles from "../page.module.css";
-import { rgbaToHex } from "@uiw/color-convert";
+
+interface ColorComboProps {
+  colour1: string;
+  colour2: string;
+  hex1: string;
+  hex2: string;
+  contrast: number;
+  contrastLevel: string;
+}
 
 export default function ColorCombo({
   colour1,
@@ -8,7 +16,7 @@ export default function ColorCombo({
   hex2,
   contrast,
   contrastLevel,
-}) {
+}: ColorComboProps) {
   return (
     <section className={styles.colorCombinationWrapper}>
       <div
@@ -43,7 +51,7 @@ export default function ColorCombo({
         ) : (
           ""
         )}
-        <p className={styles.contrast}>{contrast}</p>
+        <p className={styles.contrast}>{contrast.toFixed(1)}</p>
       </div>
       <h4 className={styles.visuallyHidden}>Info:</h4>
       <h5>Background:</h5>

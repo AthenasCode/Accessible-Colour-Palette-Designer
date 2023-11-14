@@ -1,6 +1,6 @@
 import styles from "../page.module.css";
 
-export default function ChosenColour({ color }) {
+export default function ChosenColor({ color }) {
   return (
     <div
       className={styles.colorDisplay}
