@@ -20,7 +20,7 @@ interface RgbColor {
 }
 
 interface Combination {
-  contrastLevel: string;
+  contrastLevel: number;
   colorArray: [RgbColor, HexColor, number][];
 }
 
@@ -57,24 +57,23 @@ export default function ColorChoices() {
   });
   const [black, setBlack] = useState(false);
   const [white, setWhite] = useState(false);
-  const [aaa, setAaa] = useState([]);
-  const [aa, setAa] = useState([]);
-  const [lowContrast, setLowContrast] = useState([]);
+  const [aaa, setAaa] = useState<Combination[]>([]);
+  const [aa, setAa] = useState<Combination[]>([]);
+  const [lowContrast, setLowContrast] = useState<Combination[]>([]);
 
   useEffect(() => {
     // Convert hex to rgb:
-    const hexColours = [
+    const hexColours: HexColor[] = [
       colour1,
       colour2,
       colour3,
       colour4,
       colour5,
       colour6,
-      black ? { color: "#000000", background: false, text: true } : null,
-      white ? { color: "#FFFFFF", background: true, text: true } : null,
-    ].filter(Boolean);
+      ...(black ? [{ color: "#000000", background: false, text: true }] : []),
+      ...(white ? [{ color: "#FFFFFF", background: true, text: true }] : []),
+    ];
 
-    console.log(hexColours);
     const rgbColours = [];
     hexColours.map((colour) => {
       const { r: r, g: g, b: b } = hexToRgba(colour.color);
@@ -111,7 +110,7 @@ export default function ColorChoices() {
 
     combinations.sort((a, b) => b[2] - a[2]); // negative if a < b, positive if a > b
 
-    const aaa = combinations.filter((c) => c[2] >= 4.5);
+    const aaa: Combination[] = combinations.filter((c) => c[2] >= 4.5);
     const aa = combinations.filter((c) => c[2] < 4.5 && c[2] >= 3);
     const lowContrast = combinations.filter((c) => c[2] < 3);
 
