@@ -19,11 +19,6 @@ interface RgbColor {
   text: boolean;
 }
 
-interface Combination {
-  contrastLevel: number;
-  colorArray: [RgbColor, HexColor, number][];
-}
-
 export default function ColorChoices() {
   const [colour1, setColour1] = useState<HexColor>({
     color: "#0D1635",
@@ -57,9 +52,9 @@ export default function ColorChoices() {
   });
   const [black, setBlack] = useState(false);
   const [white, setWhite] = useState(false);
-  const [aaa, setAaa] = useState<Combination[]>([]);
-  const [aa, setAa] = useState<Combination[]>([]);
-  const [lowContrast, setLowContrast] = useState<Combination[]>([]);
+  const [aaa, setAaa] = useState([]);
+  const [aa, setAa] = useState([]);
+  const [lowContrast, setLowContrast] = useState([]);
 
   useEffect(() => {
     // Convert hex to rgb:
@@ -74,7 +69,7 @@ export default function ColorChoices() {
       ...(white ? [{ color: "#FFFFFF", background: true, text: true }] : []),
     ];
 
-    const rgbColours = [];
+    const rgbColours: RgbColor[] = [];
     hexColours.map((colour) => {
       const { r: r, g: g, b: b } = hexToRgba(colour.color);
       const rgb = [r, g, b];
@@ -85,32 +80,34 @@ export default function ColorChoices() {
       });
     });
 
-    const combinations = [];
+    const combinations: [[RgbColor, HexColor], [RgbColor, HexColor], number][] =
+      [];
 
     // Iterate over rgbColours, calculating contrasts
     for (let i = 0; i < rgbColours.length - 1; i++) {
       for (let j = i + 1; j < rgbColours.length; j++) {
-        const rgbBg = rgbColours[i]; // Object e.g. {rgb: [13, 22, 53], background: true, text: true}
-        const rgbTxt = rgbColours[j]; // next colour after i
-        const hexBg = hexColours[i];
-        const hexTxt = hexColours[j];
-        const contrastValue = contrast(rgbBg, rgbTxt).toFixed(2);
+        const rgbBg: RgbColor = rgbColours[i]; // Object e.g. {rgb: [13, 22, 53], background: true, text: true}
+        const rgbTxt: RgbColor = rgbColours[j]; // next colour after i
+        const hexBg: HexColor = hexColours[i];
+        const hexTxt: HexColor = hexColours[j];
+        const contrastValue: number = contrast(rgbBg, rgbTxt).toFixed(2);
         combinations.push([[rgbBg, hexBg], [rgbTxt, hexTxt], contrastValue]);
       }
     }
 
-    // Swap colours in each combination (to account for background/text swaps)
+    // Swap background and text combinations (text becomes bg, bg becomes text)
     combinations.map((combo) => {
-      const colour1 = combo[0];
-      const colour2 = combo[1];
-      const contrast = combo[2];
+      const background = combo[0];
+      const text = combo[1];
+      const contrastValue = combo[2];
 
-      combinations.push([colour2, colour1, contrast]);
+      combinations.push([text, background, contrastValue]);
     });
 
-    combinations.sort((a, b) => b[2] - a[2]); // negative if a < b, positive if a > b
+    // Sort combinations based on contrast
+    combinations.sort((a, b) => b[2] - a[2]);
 
-    const aaa: Combination[] = combinations.filter((c) => c[2] >= 4.5);
+    const aaa = combinations.filter((c) => c[2] >= 4.5);
     const aa = combinations.filter((c) => c[2] < 4.5 && c[2] >= 3);
     const lowContrast = combinations.filter((c) => c[2] < 3);
 
