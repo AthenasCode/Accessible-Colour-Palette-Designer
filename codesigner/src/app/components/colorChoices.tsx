@@ -52,9 +52,15 @@ export default function ColorChoices() {
   });
   const [black, setBlack] = useState(false);
   const [white, setWhite] = useState(false);
-  const [aaa, setAaa] = useState([]);
-  const [aa, setAa] = useState([]);
-  const [lowContrast, setLowContrast] = useState([]);
+  const [aaa, setAaa] = useState<
+    [[RgbColor, HexColor], [RgbColor, HexColor], number][]
+  >([]);
+  const [aa, setAa] = useState<
+    [[RgbColor, HexColor], [RgbColor, HexColor], number][]
+  >([]);
+  const [lowContrast, setLowContrast] = useState<
+    [[RgbColor, HexColor], [RgbColor, HexColor], number][]
+  >([]);
 
   useEffect(() => {
     // Convert hex to rgb:
