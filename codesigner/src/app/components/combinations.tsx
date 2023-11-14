@@ -38,14 +38,10 @@ export default function Combinations({ colorArray, contrastLevel }) {
         {contrastLevel === "Low" && !displayLowContrast
           ? ""
           : colorArray.map((combo, index) => {
-              console.log("mapping colorArray", combo);
-
               const backgroundRgb = combo[0][0].rgb;
               const textRgb = combo[1][0].rgb;
               const backgroundHex = combo[0][1].color;
               const textHex = combo[1][1].color;
-
-              console.log("backgroundHex", backgroundHex);
 
               // Check if either background or text should be rendered
               if (!combo[0][0].background || !combo[1][0].text) {

@@ -7,47 +7,74 @@ import contrast from "../utils/colourContrastCalculator";
 import { hexToRgba } from "@uiw/color-convert";
 import Combinations from "./combinations";
 
-export default function ColourChoices() {
-  const [colour1, setColour1] = useState({
+interface HexColor {
+  color: string;
+  background: boolean;
+  text: boolean;
+}
+
+interface RgbColor {
+  rgb: number[];
+  background: boolean;
+  text: boolean;
+}
+
+interface Combination {
+  contrastLevel: string;
+  colorArray: [RgbColor, HexColor, number][];
+}
+
+export default function ColorChoices() {
+  const [colour1, setColour1] = useState<HexColor>({
     color: "#0D1635",
     background: true,
     text: true,
   });
-  const [colour2, setColour2] = useState({
+  const [colour2, setColour2] = useState<HexColor>({
     color: "#0A0C18",
     background: true,
     text: true,
   });
-  const [colour3, setColour3] = useState({
+  const [colour3, setColour3] = useState<HexColor>({
     color: "#393F59",
     background: true,
     text: true,
   });
-  const [colour4, setColour4] = useState({
+  const [colour4, setColour4] = useState<HexColor>({
     color: "#DF9D87",
     background: true,
     text: true,
   });
-  const [colour5, setColour5] = useState({
+  const [colour5, setColour5] = useState<HexColor>({
     color: "#337A7E",
     background: true,
     text: true,
   });
-  const [colour6, setColour6] = useState({
+  const [colour6, setColour6] = useState<HexColor>({
     color: "#FBDEAE",
     background: true,
     text: true,
   });
+  const [black, setBlack] = useState(false);
+  const [white, setWhite] = useState(false);
   const [aaa, setAaa] = useState([]);
   const [aa, setAa] = useState([]);
-  const [excludeAsBackground, setExcludeAsBackground] = useState(false);
-  const [excludeAsText, setExcludeAsText] = useState(false);
-
   const [lowContrast, setLowContrast] = useState([]);
 
   useEffect(() => {
     // Convert hex to rgb:
-    const hexColours = [colour1, colour2, colour3, colour4, colour5, colour6];
+    const hexColours = [
+      colour1,
+      colour2,
+      colour3,
+      colour4,
+      colour5,
+      colour6,
+      black ? { color: "#000000", background: false, text: true } : null,
+      white ? { color: "#FFFFFF", background: true, text: true } : null,
+    ].filter(Boolean);
+
+    console.log(hexColours);
     const rgbColours = [];
     hexColours.map((colour) => {
       const { r: r, g: g, b: b } = hexToRgba(colour.color);
@@ -91,11 +118,11 @@ export default function ColourChoices() {
     setAaa(aaa);
     setAa(aa);
     setLowContrast(lowContrast);
-  }, [colour1, colour2, colour3, colour4, colour5, colour6]);
+  }, [colour1, colour2, colour3, colour4, colour5, colour6, black, white]);
 
   return (
     <section className={styles.pageContent}>
-      <section className={styles.colourChoices}>
+      <section className={styles.colorChoices}>
         <ColorPicker
           hex={colour1.color}
           setHex={setColour1}
@@ -132,20 +159,27 @@ export default function ColourChoices() {
           excludeAsBackground={colour6.background}
           excludeAsText={colour6.text}
         />
-        <h2>Colours:</h2>
+        <label htmlFor="">
+          <input
+            type="checkbox"
+            checked={black}
+            onChange={() => setBlack((prev) => !prev)}
+          />
+          Include black text
+        </label>
+        <label htmlFor="">
+          <input
+            type="checkbox"
+            checked={white}
+            onChange={() => setWhite((prev) => !prev)}
+          />
+          Include white text and background
+        </label>
+        <h2>Your colours:</h2>
         <p>
           {colour1.color}, {colour2.color}, {colour3.color}, {colour4.color},{" "}
           {colour5.color}, {colour6.color}
         </p>
-        <h2>Tips for light themes:</h2>
-        <ol>
-          <li>
-            Choose two desaturated dark colours (options for primary text)
-          </li>
-          <li>Choose one desaturated dark colour (alternative text)</li>
-          <li>Choose two desaturated light colours (for backgrounds)</li>
-          <li>Choose one saturated accent colour (exclude as background)</li>
-        </ol>
       </section>
       <section className={styles.combinationsSection}>
         <Combinations contrastLevel={"AAA"} colorArray={aaa} />

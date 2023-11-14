@@ -1,5 +1,4 @@
 import styles from "../page.module.css";
-import { rgbaToHex } from "@uiw/color-convert";
 
 export default function ColorCombo({
   colour1,
@@ -9,8 +8,6 @@ export default function ColorCombo({
   contrast,
   contrastLevel,
 }) {
-  console.log("hex1", hex1);
-
   return (
     <section className={styles.colorCombinationWrapper}>
       <div
