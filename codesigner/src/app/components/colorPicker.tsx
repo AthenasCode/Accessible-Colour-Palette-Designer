@@ -69,9 +69,10 @@ export default function ColorPicker({
       </div>
       <section className={styles.colourEditingTools}>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <label htmlFor="">
+          <label htmlFor="hexInput">
             Input hex:{" "}
             <input
+              id="hexInput"
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}

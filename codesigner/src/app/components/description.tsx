@@ -1,25 +1,25 @@
-export default function Description({ contrastLevel }) {
+interface DescriptionProps {
+  contrastLevel: string;
+}
+
+export default function Description({ contrastLevel }: DescriptionProps) {
   return (
     <>
       {contrastLevel === "AAA" && (
         <>
-          <h4>Normal text</h4>
-          <p>Contrast ratio of at least 7:1</p>
-          <h4>Large text</h4>
-          <p>Contrast ratio of at least 4.5:1</p>
+          <p>Normal text &gt;= 7:1</p>
+          <p>Large text &gt;= 4.5:1</p>
         </>
       )}
       {contrastLevel === "AA" && (
         <>
-          <h4>Normal text</h4>
-          <p>Contrast ratio of at least 4.5:1</p>
-          <h4>Large text</h4>
-          <p>Contrast ratio of at least 3:1</p>
+          <p>Normal text &gt;= 4.5:1</p>
+          <p>Large text &gt;= 3:1</p>
         </>
       )}
       {contrastLevel === "Low" && (
         <>
-          <p>Contrast ratio is less than 3:1</p>
+          <p>Contrast ratio &lt; 3:1</p>
         </>
       )}
     </>

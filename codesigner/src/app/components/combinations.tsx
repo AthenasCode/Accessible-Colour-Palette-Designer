@@ -28,14 +28,14 @@ export default function Combinations({
 
   return (
     <section>
-      <h2>
+      <h3>
         {contrastLevel}{" "}
         {contrastLevel === "AAA"
           ? "(Enhanced Contrast)"
           : contrastLevel === "AA"
           ? "(Minimum Contrast)"
           : "Contrast"}
-      </h2>
+      </h3>
       {contrastLevel == "Low" ? (
         <>
           <button onClick={() => setDisplayLowContrast((prev) => !prev)}>

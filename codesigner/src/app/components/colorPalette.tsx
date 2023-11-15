@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import contrast from "../utils/colourContrastCalculator";
 import { hexToRgba } from "@uiw/color-convert";
 import Combinations from "./combinations";
+import { Dispatch, SetStateAction } from "react";
 
 interface HexColor {
   color: string;
@@ -19,7 +20,23 @@ interface RgbColor {
   text: boolean;
 }
 
-export default function ColorChoices() {
+interface ColorPaletteProps {
+  setAaa: Dispatch<
+    SetStateAction<[[RgbColor, HexColor], [RgbColor, HexColor], number][]>
+  >;
+  setAa: Dispatch<
+    SetStateAction<[[RgbColor, HexColor], [RgbColor, HexColor], number][]>
+  >;
+  setLowContrast: Dispatch<
+    SetStateAction<[[RgbColor, HexColor], [RgbColor, HexColor], number][]>
+  >;
+}
+
+export default function ColorPalette({
+  setAaa,
+  setAa,
+  setLowContrast,
+}: ColorPaletteProps) {
   const [colour1, setColour1] = useState<HexColor>({
     color: "#0D1635",
     background: true,
@@ -52,15 +69,6 @@ export default function ColorChoices() {
   });
   const [black, setBlack] = useState(false);
   const [white, setWhite] = useState(false);
-  const [aaa, setAaa] = useState<
-    [[RgbColor, HexColor], [RgbColor, HexColor], number][]
-  >([]);
-  const [aa, setAa] = useState<
-    [[RgbColor, HexColor], [RgbColor, HexColor], number][]
-  >([]);
-  const [lowContrast, setLowContrast] = useState<
-    [[RgbColor, HexColor], [RgbColor, HexColor], number][]
-  >([]);
 
   useEffect(() => {
     // Convert hex to rgb:
@@ -71,7 +79,7 @@ export default function ColorChoices() {
       colour4,
       colour5,
       colour6,
-      ...(black ? [{ color: "#000000", background: false, text: true }] : []),
+      ...(black ? [{ color: "#000000", background: true, text: true }] : []),
       ...(white ? [{ color: "#FFFFFF", background: true, text: true }] : []),
     ];
 
@@ -123,8 +131,9 @@ export default function ColorChoices() {
   }, [colour1, colour2, colour3, colour4, colour5, colour6, black, white]);
 
   return (
-    <section className={styles.pageContent}>
-      <section className={styles.colorChoices}>
+    <section className={styles.paletteContent}>
+      <h2>Colour Palette</h2>
+      <section className={styles.colorPalette}>
         <ColorPicker
           hex={colour1.color}
           setHex={setColour1}
@@ -161,13 +170,14 @@ export default function ColorChoices() {
           excludeAsBackground={colour6.background}
           excludeAsText={colour6.text}
         />
+
         <label htmlFor="">
           <input
             type="checkbox"
             checked={black}
             onChange={() => setBlack((prev) => !prev)}
           />
-          Include black text
+          Include black
         </label>
         <label htmlFor="">
           <input
@@ -175,19 +185,14 @@ export default function ColorChoices() {
             checked={white}
             onChange={() => setWhite((prev) => !prev)}
           />
-          Include white text and background
+          Include white
         </label>
-        <h2>Your colours:</h2>
-        <p>
-          {colour1.color}, {colour2.color}, {colour3.color}, {colour4.color},{" "}
-          {colour5.color}, {colour6.color}
-        </p>
       </section>
-      <section className={styles.combinationsSection}>
-        <Combinations contrastLevel={"AAA"} colorArray={aaa} />
-        <Combinations contrastLevel={"AA"} colorArray={aa} />
-        <Combinations contrastLevel={"Low"} colorArray={lowContrast} />
-      </section>
+      <h3>Your colours:</h3>
+      <p>
+        {colour1.color}, {colour2.color}, {colour3.color}, {colour4.color},{" "}
+        {colour5.color}, {colour6.color}
+      </p>
     </section>
   );
 }
