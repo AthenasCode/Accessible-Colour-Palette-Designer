@@ -1,7 +1,7 @@
 "use client";
 
 import { Sketch } from "@uiw/react-color";
-
+import { Dispatch, SetStateAction } from "react";
 import { HsvaColor, ColorResult } from "@uiw/color-convert";
 import { SwatchPresetColor } from "@uiw/react-color-swatch";
 import ChosenColour from "./chosenColour";
@@ -19,12 +19,25 @@ export interface SketchProps
   onChange?: (newShade: ColorResult) => void;
 }
 
+interface HexColor {
+  color: string;
+  background: boolean;
+  text: boolean;
+}
+
+interface ColorPickerProps {
+  hex: string;
+  setHex: Dispatch<SetStateAction<HexColor>>;
+  excludeAsBackground: boolean;
+  excludeAsText: boolean;
+}
+
 export default function ColorPicker({
   hex,
   setHex,
   excludeAsBackground,
   excludeAsText,
-}) {
+}: ColorPickerProps) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [inputValue, setInputValue] = useState(hex);
 
@@ -36,7 +49,7 @@ export default function ColorPicker({
     setHex((prev) => ({ ...prev, text: !prev.text }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     // Validate if the input is a valid hex code
@@ -64,7 +77,7 @@ export default function ColorPicker({
             setHex((prev) => ({ ...prev, color: color.hex }));
             setInputValue(color.hex);
           }}
-          disableAlpha="true"
+          disableAlpha={true}
         />
       </div>
       <section className={styles.colourEditingTools}>
