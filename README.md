@@ -19,3 +19,6 @@ Below are some other resources I've found helpful for generating colour palettes
 
 
 I am still learning about accessible web design, so any feedback on how this can be improved is welcome!
+
+
+Note: I am aware of an issue where if the user excludes colours as background or text, this disrupts the default layout. I will fix this when I have some free time.
