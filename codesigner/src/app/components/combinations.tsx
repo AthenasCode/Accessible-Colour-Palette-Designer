@@ -47,6 +47,11 @@ export default function Combinations({
           <h3>
             Low Contrast
             <Description contrastLevel={contrastLevel} />
+            <button onClick={() => setDisplayLowContrast((prev) => !prev)}>
+              {!displayLowContrast
+                ? `Show ${colorArray.length} combinations`
+                : "Hide combinations"}
+            </button>
           </h3>
         </>
       )}
