@@ -38,32 +38,32 @@ export default function ColorPalette({
   setLowContrast,
 }: ColorPaletteProps) {
   const [colour1, setColour1] = useState<HexColor>({
-    color: "#0D1635",
+    color: "#ffd8c0",
     background: true,
     text: true,
   });
   const [colour2, setColour2] = useState<HexColor>({
-    color: "#0A0C18",
+    color: "#f48d8f",
     background: true,
     text: true,
   });
   const [colour3, setColour3] = useState<HexColor>({
-    color: "#393F59",
+    color: "#b06774",
     background: true,
     text: true,
   });
   const [colour4, setColour4] = useState<HexColor>({
-    color: "#DF9D87",
+    color: "#564362",
     background: true,
     text: true,
   });
   const [colour5, setColour5] = useState<HexColor>({
-    color: "#337A7E",
+    color: "#2d4156",
     background: true,
     text: true,
   });
   const [colour6, setColour6] = useState<HexColor>({
-    color: "#FBDEAE",
+    color: "#171f25",
     background: true,
     text: true,
   });
@@ -131,7 +131,7 @@ export default function ColorPalette({
   }, [colour1, colour2, colour3, colour4, colour5, colour6, black, white]);
 
   return (
-    <section className={styles.paletteContent}>
+    <section className={styles.paletteSection}>
       <h2>Colour Palette</h2>
       <section className={styles.colorPalette}>
         <ColorPicker
@@ -170,29 +170,32 @@ export default function ColorPalette({
           excludeAsBackground={colour6.background}
           excludeAsText={colour6.text}
         />
-
-        <label htmlFor="">
-          <input
-            type="checkbox"
-            checked={black}
-            onChange={() => setBlack((prev) => !prev)}
-          />
-          Include black
-        </label>
-        <label htmlFor="">
-          <input
-            type="checkbox"
-            checked={white}
-            onChange={() => setWhite((prev) => !prev)}
-          />
-          Include white
-        </label>
+        <section className={styles.blackWhiteToggle}>
+          <label htmlFor="black-toggle">
+            <input
+              id="black-toggle"
+              type="checkbox"
+              checked={black}
+              onChange={() => setBlack((prev) => !prev)}
+            />
+            Include black
+          </label>
+          <label htmlFor="white-toggle">
+            <input
+              id="white-toggle"
+              type="checkbox"
+              checked={white}
+              onChange={() => setWhite((prev) => !prev)}
+            />
+            Include white
+          </label>
+        </section>
       </section>
-      <h3>Your colours:</h3>
+      {/* <h3>Your colours:</h3>
       <p>
         {colour1.color}, {colour2.color}, {colour3.color}, {colour4.color},{" "}
         {colour5.color}, {colour6.color}
-      </p>
+      </p> */}
     </section>
   );
 }

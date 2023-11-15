@@ -28,26 +28,29 @@ export default function Combinations({
 
   return (
     <section>
-      <h3>
-        {contrastLevel}{" "}
-        {contrastLevel === "AAA"
-          ? "(Enhanced Contrast)"
-          : contrastLevel === "AA"
-          ? "(Minimum Contrast)"
-          : "Contrast"}
-      </h3>
-      {contrastLevel == "Low" ? (
+      {contrastLevel === "AAA" ? (
         <>
-          <button onClick={() => setDisplayLowContrast((prev) => !prev)}>
-            {displayLowContrast
-              ? "(hide)"
-              : `(show ${colorArray.length} combinations)`}
-          </button>
+          <h3>
+            AAA (Enhanced Contrast)
+            <Description contrastLevel={contrastLevel} />
+          </h3>
+        </>
+      ) : contrastLevel === "AA" ? (
+        <>
+          <h3>
+            AA (Minimum Contrast)
+            <Description contrastLevel={contrastLevel} />
+          </h3>
         </>
       ) : (
-        <></>
+        <>
+          <h3>
+            Low Contrast
+            <Description contrastLevel={contrastLevel} />
+          </h3>
+        </>
       )}
-      <Description contrastLevel={contrastLevel} />
+
       <section className={styles.colourCombos}>
         {contrastLevel === "Low" && !displayLowContrast
           ? ""
@@ -62,12 +65,6 @@ export default function Combinations({
                 const textHex = combo[1][1].color;
                 const contrast = combo[2];
 
-                console.log("contrast", contrast);
-                console.log(
-                  "type of contrast before passing to ColorCombo",
-                  typeof contrast
-                );
-
                 // Check if either background or text should be rendered
                 if (!combo[0][0].background || !combo[1][0].text) {
                   return null; // Skip rendering if either condition is false
@@ -76,8 +73,9 @@ export default function Combinations({
                 return (
                   <ColorCombo
                     key={index}
-                    colour1={`rgb(${backgroundRgb})`}
-                    colour2={`rgb(${textRgb})`}
+                    index={index}
+                    colour1={`${backgroundRgb}`}
+                    colour2={`${textRgb}`}
                     hex1={backgroundHex}
                     hex2={textHex}
                     contrast={contrast}

@@ -7,6 +7,7 @@ interface ColorComboProps {
   hex2: string;
   contrast: number;
   contrastLevel: string;
+  index: number;
 }
 
 export default function ColorCombo({
@@ -16,12 +17,19 @@ export default function ColorCombo({
   hex2,
   contrast,
   contrastLevel,
+  index,
 }: ColorComboProps) {
   return (
-    <section className={styles.colorCombinationWrapper}>
+    <section
+      className={`${
+        index % 2 == 0
+          ? styles.colorCombinationEven
+          : styles.colorCombinationOdd
+      }`}
+    >
       <div
         className={styles.colorCombinationDisplay}
-        style={{ backgroundColor: colour1, color: colour2 }}
+        style={{ backgroundColor: `rgb(${colour1})`, color: `rgb(${colour2})` }}
       >
         {contrast > 4.5 && contrastLevel === "AAA" ? (
           <>
@@ -35,9 +43,9 @@ export default function ColorCombo({
                 cx="15"
                 cy="15"
                 r="10"
-                stroke={`${colour2}`}
+                stroke={`rgb(${colour2})`}
                 strokeWidth="3"
-                fill={`${colour2}`}
+                fill={`rgb(${colour2})`}
               />
             </svg>
           </>

@@ -3,7 +3,7 @@
 import styles from "./page.module.css";
 import ColorPalette from "./components/colorPalette";
 import CombinationsSection from "./components/combinationsSection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface HexColor {
   color: string;
@@ -35,9 +35,9 @@ export default function Home() {
         <p>
           For more information, see{" "}
           <a href="https://www.w3.org/TR/WCAG21/#contrast-minimum">
-            Web Content Accessibility Guidelines (WCAG
+            Web Content Accessibility Guidelines (WCAG)
           </a>
-          )
+          .
         </p>
       </header>
       <ColorPalette
