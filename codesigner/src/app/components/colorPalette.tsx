@@ -67,10 +67,16 @@ export default function ColorPalette({
     background: true,
     text: true,
   });
-  const [blackText, setBlackText] = useState(false);
-  const [blackBg, setBlackBg] = useState(false);
-  const [whiteText, setWhiteText] = useState(false);
-  const [whiteBg, setWhiteBg] = useState(false);
+  const [black, setBlack] = useState<HexColor>({
+    color: "#000000",
+    background: false,
+    text: false,
+  });
+  const [white, setWhite] = useState<HexColor>({
+    color: "#ffffff",
+    background: false,
+    text: false,
+  });
 
   useEffect(() => {
     // Convert hex to rgb:
@@ -81,14 +87,8 @@ export default function ColorPalette({
       colour4,
       colour5,
       colour6,
-      ...(blackText
-        ? [{ color: "#000000", background: false, text: true }]
-        : []),
-      ...(blackBg ? [{ color: "#000000", background: true, text: false }] : []),
-      ...(whiteText
-        ? [{ color: "#FFFFFF", background: false, text: true }]
-        : []),
-      ...(whiteBg ? [{ color: "#FFFFFF", background: true, text: false }] : []),
+      black,
+      white,
     ];
 
     const rgbColours: RgbColor[] = [];
@@ -136,18 +136,7 @@ export default function ColorPalette({
     setAaa(aaa);
     setAa(aa);
     setLowContrast(lowContrast);
-  }, [
-    colour1,
-    colour2,
-    colour3,
-    colour4,
-    colour5,
-    colour6,
-    blackText,
-    blackBg,
-    whiteText,
-    whiteBg,
-  ]);
+  }, [colour1, colour2, colour3, colour4, colour5, colour6, black, white]);
 
   return (
     <section className={styles.paletteSection}>
@@ -194,8 +183,10 @@ export default function ColorPalette({
             <input
               id="black-text-toggle"
               type="checkbox"
-              checked={blackText}
-              onChange={() => setBlackText((prev) => !prev)}
+              checked={black.text}
+              onChange={() =>
+                setBlack((prev) => ({ ...prev, text: !prev.text }))
+              }
             />
             Include black text
           </label>
@@ -203,8 +194,10 @@ export default function ColorPalette({
             <input
               id="black-bg-toggle"
               type="checkbox"
-              checked={blackBg}
-              onChange={() => setBlackBg((prev) => !prev)}
+              checked={black.background}
+              onChange={() =>
+                setBlack((prev) => ({ ...prev, background: !prev.background }))
+              }
             />
             Include black background
           </label>
@@ -212,8 +205,10 @@ export default function ColorPalette({
             <input
               id="white-text-toggle"
               type="checkbox"
-              checked={whiteText}
-              onChange={() => setWhiteText((prev) => !prev)}
+              checked={white.text}
+              onChange={() =>
+                setWhite((prev) => ({ ...prev, text: !prev.text }))
+              }
             />
             Include white text
           </label>
@@ -221,8 +216,10 @@ export default function ColorPalette({
             <input
               id="white-bg-toggle"
               type="checkbox"
-              checked={whiteBg}
-              onChange={() => setWhiteBg((prev) => !prev)}
+              checked={white.background}
+              onChange={() =>
+                setWhite((prev) => ({ ...prev, background: !prev.background }))
+              }
             />
             Include white background
           </label>

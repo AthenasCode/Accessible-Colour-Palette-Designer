@@ -7,7 +7,7 @@ interface ColorComboProps {
   hex2: string;
   contrast: number;
   contrastLevel: string;
-  index: number;
+  paired: boolean;
 }
 
 export default function ColorCombo({
@@ -17,14 +17,14 @@ export default function ColorCombo({
   hex2,
   contrast,
   contrastLevel,
-  index,
+  paired,
 }: ColorComboProps) {
   return (
     <section
       className={`${
-        index % 2 == 0
-          ? styles.colorCombinationEven
-          : styles.colorCombinationOdd
+        paired
+          ? styles.colorCombinationPaired
+          : styles.colorCombinationNotPaired
       }`}
     >
       <div

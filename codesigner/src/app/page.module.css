@@ -87,11 +87,11 @@
   aspect-ratio: 1/1;
 }
 
-.colorCombinationEven {
+.colorCombinationPaired {
   margin-right: 0;
 }
 
-.colorCombinationOdd {
+.colorCombinationNotPaired {
   margin-right: 0.5rem;
 }
 
