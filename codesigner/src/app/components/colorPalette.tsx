@@ -67,8 +67,10 @@ export default function ColorPalette({
     background: true,
     text: true,
   });
-  const [black, setBlack] = useState(false);
-  const [white, setWhite] = useState(false);
+  const [blackText, setBlackText] = useState(false);
+  const [blackBg, setBlackBg] = useState(false);
+  const [whiteText, setWhiteText] = useState(false);
+  const [whiteBg, setWhiteBg] = useState(false);
 
   useEffect(() => {
     // Convert hex to rgb:
@@ -79,8 +81,14 @@ export default function ColorPalette({
       colour4,
       colour5,
       colour6,
-      ...(black ? [{ color: "#000000", background: true, text: true }] : []),
-      ...(white ? [{ color: "#FFFFFF", background: true, text: true }] : []),
+      ...(blackText
+        ? [{ color: "#000000", background: false, text: true }]
+        : []),
+      ...(blackBg ? [{ color: "#000000", background: true, text: false }] : []),
+      ...(whiteText
+        ? [{ color: "#FFFFFF", background: false, text: true }]
+        : []),
+      ...(whiteBg ? [{ color: "#FFFFFF", background: true, text: false }] : []),
     ];
 
     const rgbColours: RgbColor[] = [];
@@ -128,7 +136,18 @@ export default function ColorPalette({
     setAaa(aaa);
     setAa(aa);
     setLowContrast(lowContrast);
-  }, [colour1, colour2, colour3, colour4, colour5, colour6, black, white]);
+  }, [
+    colour1,
+    colour2,
+    colour3,
+    colour4,
+    colour5,
+    colour6,
+    blackText,
+    blackBg,
+    whiteText,
+    whiteBg,
+  ]);
 
   return (
     <section className={styles.paletteSection}>
@@ -171,23 +190,41 @@ export default function ColorPalette({
           excludeAsText={colour6.text}
         />
         <section className={styles.blackWhiteToggle}>
-          <label htmlFor="black-toggle">
+          <label htmlFor="black-text-toggle">
             <input
-              id="black-toggle"
+              id="black-text-toggle"
               type="checkbox"
-              checked={black}
-              onChange={() => setBlack((prev) => !prev)}
+              checked={blackText}
+              onChange={() => setBlackText((prev) => !prev)}
             />
-            Include black
+            Include black text
           </label>
-          <label htmlFor="white-toggle">
+          <label htmlFor="black-bg-toggle">
             <input
-              id="white-toggle"
+              id="black-bg-toggle"
               type="checkbox"
-              checked={white}
-              onChange={() => setWhite((prev) => !prev)}
+              checked={blackBg}
+              onChange={() => setBlackBg((prev) => !prev)}
             />
-            Include white
+            Include black background
+          </label>
+          <label htmlFor="white-text-toggle">
+            <input
+              id="white-text-toggle"
+              type="checkbox"
+              checked={whiteText}
+              onChange={() => setWhiteText((prev) => !prev)}
+            />
+            Include white text
+          </label>
+          <label htmlFor="white-bg-toggle">
+            <input
+              id="white-bg-toggle"
+              type="checkbox"
+              checked={whiteBg}
+              onChange={() => setWhiteBg((prev) => !prev)}
+            />
+            Include white background
           </label>
         </section>
       </section>
