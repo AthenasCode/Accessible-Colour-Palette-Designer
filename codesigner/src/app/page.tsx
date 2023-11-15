@@ -3,7 +3,7 @@
 import styles from "./page.module.css";
 import ColorPalette from "./components/colorPalette";
 import CombinationsSection from "./components/combinationsSection";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface HexColor {
   color: string;
