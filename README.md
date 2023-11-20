@@ -16,6 +16,7 @@ Below are some other resources I've found helpful for generating colour palettes
 * [Canva Color Wheel](https://www.canva.com/colors/color-wheel/)
 * [Coolors](https://coolors.co/463f3a-8a817c-bcb8b1-f4f3ee-e0afa0)
 * [Encycolorpedia](https://encycolorpedia.com/eb667d)
+* [Accessible Palette](https://accessiblepalette.com/) and a [great resource for understanding colour theory](https://wildbit.com/blog/accessible-palette-stop-using-hsl-for-color-systems)
 
 
 I am still learning about accessible web design, so any feedback on how this can be improved is welcome!
