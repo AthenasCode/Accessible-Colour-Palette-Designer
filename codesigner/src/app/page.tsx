@@ -48,10 +48,9 @@ export default function Home() {
             and a text colour.
           </li>
           <li>
-            To exclude colours from the combinations, use the "exclude as
-            background/text" checkboxes accordingly. To exclude a colour
-            completely, check both "exclude as background" and "exclude as
-            text".
+            To exclude colours from the combinations, use the exclude as
+            background/text checkboxes accordingly. To exclude a colour
+            completely, check both exclude as background and exclude as text.
           </li>
           <li>
             Black and white backgrounds and/or text can also be included in the
