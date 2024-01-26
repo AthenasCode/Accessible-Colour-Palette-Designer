@@ -54,9 +54,14 @@ h3 {
   margin-bottom: 0.5rem;
 }
 
-p {
+p,
+ol {
   font-family: "Karla", sans-serif;
   font-size: 14px;
+}
+
+ol {
+  list-style-position: inside;
 }
 
 label {

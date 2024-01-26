@@ -26,12 +26,9 @@ export default function Combinations({
 }: CombinationsProps) {
   const [displayLowContrast, setDisplayLowContrast] = useState(false);
 
-  // console.log(JSON.stringify(colorArray), contrastLevel);
   const filteredArray = colorArray.filter((combo) => {
     return combo[0][0].background && combo[1][0].text;
   });
-
-  console.log(JSON.stringify(filteredArray), contrastLevel);
 
   return (
     <section>
@@ -89,14 +86,8 @@ export default function Combinations({
                     backgroundRgb === nextTextRgb &&
                     textRgb === nextBackgroundRgb
                   ) {
-                    console.log("pairing found", backgroundRgb, nextTextRgb);
                     paired = true;
                   } else {
-                    console.log(
-                      "non-pairing found",
-                      backgroundRgb,
-                      nextTextRgb
-                    );
                     paired = false;
                   }
                 }

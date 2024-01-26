@@ -55,7 +55,6 @@ export default function ColorPicker({
     // Validate if the input is a valid hex code
     if (/^#([0-9A-F]{3}){1,2}$/i.test(inputValue)) {
       // Process the valid hex code
-      console.log("Valid hex code:", inputValue);
       setHex((prev) => ({ ...prev, color: inputValue }));
     } else {
       // Handle the case when the input is not a valid hex code
