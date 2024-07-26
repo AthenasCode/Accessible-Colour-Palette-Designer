@@ -1,22 +1,27 @@
+"use client";
+
 import type { Metadata } from "next";
 import { Capriola } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import styles from "./layout.module.css";
+import { usePathname } from "next/navigation";
 
 const capriola = Capriola({ weight: "400", subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Accessible Colour Palette Designer",
-  description:
-    "A colour palette designer that calculates and displays colour contrasts.",
-};
+// export const metadata: Metadata = {
+//   title: "Accessible Colour Palette Designer",
+//   description:
+//     "A colour palette designer that calculates and displays colour contrasts.",
+// };
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
   return (
     <html lang="en">
       <body className={capriola.className}>
@@ -25,10 +30,20 @@ export default function RootLayout({
           <nav className={styles.nav}>
             <ul>
               <li>
-                <Link href={"/about"}>about</Link>
+                <Link
+                  href={"/about"}
+                  className={pathname == `/about` ? `${styles.activeLink}` : ""}
+                >
+                  about
+                </Link>
               </li>
               <li>
-                <Link href={"/"}>playground</Link>
+                <Link
+                  href={"/"}
+                  className={pathname == `/` ? `${styles.activeLink}` : ""}
+                >
+                  playground
+                </Link>
               </li>
             </ul>
           </nav>
