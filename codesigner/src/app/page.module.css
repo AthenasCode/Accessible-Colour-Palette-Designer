@@ -10,6 +10,7 @@
 }
 
 .main {
+  max-width: 1200px;
   width: 80vw;
   display: flex;
   flex-direction: column;
@@ -26,6 +27,7 @@
 .colorPalette {
   width: 100%;
   display: flex;
+  justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -74,6 +76,7 @@
   height: 6rem;
   aspect-ratio: 1/1;
   margin-right: 0.2rem;
+  border-radius: 5%;
 }
 
 .colorCombinationDisplay {

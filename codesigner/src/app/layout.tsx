@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Capriola } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import styles from "./layout.module.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const capriola = Capriola({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Accessible Colour Palette Designer",
@@ -19,13 +19,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={capriola.className}>
         <header className={styles.header}>
           <h1 className={styles.title}>acpd</h1>
           <nav className={styles.nav}>
             <ul>
               <li>
                 <Link href={"/about"}>about</Link>
+              </li>
+              <li>
                 <Link href={"/"}>playground</Link>
               </li>
             </ul>

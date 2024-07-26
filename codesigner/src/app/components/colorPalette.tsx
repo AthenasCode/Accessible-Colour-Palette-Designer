@@ -140,7 +140,6 @@ export default function ColorPalette({
 
   return (
     <section className={styles.paletteSection}>
-      <h2>Colour Palette</h2>
       <section className={styles.colorPalette}>
         <ColorPicker
           hex={colour1.color}
