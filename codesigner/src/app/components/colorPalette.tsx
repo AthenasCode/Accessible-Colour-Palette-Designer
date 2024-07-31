@@ -177,7 +177,7 @@ export default function ColorPalette({
           excludeAsBackground={colour6.background}
           excludeAsText={colour6.text}
         />
-        <section className={styles.blackWhiteToggle}>
+        {/* <section className={styles.blackWhiteToggle}>
           <label htmlFor="black-text-toggle">
             <input
               id="black-text-toggle"
@@ -222,7 +222,7 @@ export default function ColorPalette({
             />
             Include white background
           </label>
-        </section>
+        </section> */}
       </section>
       {/* <h3>Your colours:</h3>
       <p>

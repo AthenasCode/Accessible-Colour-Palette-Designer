@@ -82,11 +82,10 @@ export default function ColorPicker({
       <section className={styles.colourEditingTools}>
         <form onSubmit={(e) => handleSubmit(e)}>
           <label htmlFor="hexInput">
-            Input hex:{" "}
             <input
               id="hexInput"
               type="text"
-              value={inputValue}
+              value={inputValue.toUpperCase()}
               onChange={(e) => setInputValue(e.target.value)}
             />
           </label>
