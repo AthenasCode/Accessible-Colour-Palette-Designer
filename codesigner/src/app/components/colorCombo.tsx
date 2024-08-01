@@ -50,10 +50,10 @@ export default function ColorCombo({
             </svg>
           </>
         ) : (
-          "Low contrast"
+          "Hard to read"
         )}
         {contrast > 7 && contrastLevel === "AAA" ? (
-          <p className={styles.normalText}>Normal</p>
+          <p className={styles.normalText}>Easy to read</p>
         ) : contrast > 4.5 && contrastLevel === "AA" ? (
           <p className={styles.normalText}>Normal</p>
         ) : (
