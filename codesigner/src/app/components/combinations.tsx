@@ -1,38 +1,29 @@
 import styles from "../page.module.css";
-import ColorCombo from "./colorCombo";
+import ContrastPair from "./contrastPair";
 import { useState } from "react";
-import Description from "./description";
-
-interface HexColor {
-  color: string;
-}
 
 interface RgbColor {
   rgb: number[];
 }
 
 interface CombinationsProps {
-  colorArray: [[RgbColor, HexColor], [RgbColor, HexColor], number][];
-  contrastLevel: string;
+  colorArray: [[RgbColor, string], [RgbColor, string], number][];
+  contrastCategory: string;
 }
 
 export default function Combinations({
   colorArray,
-  contrastLevel,
+  contrastCategory,
 }: CombinationsProps) {
   const [displayLowContrast, setDisplayLowContrast] = useState(false);
 
-  // const filteredArray = colorArray.filter((combo) => {
-  //   return combo[0][0].background && combo[1][0].text;
-  // });
-
   return (
     <section>
-      {contrastLevel === "AAA" ? (
+      {contrastCategory === "AAA" ? (
         <>
           <h3>Enhanced (AAA)</h3>
         </>
-      ) : contrastLevel === "AA" ? (
+      ) : contrastCategory === "AA" ? (
         <>
           <h3>Minimum (AA)</h3>
         </>
@@ -49,48 +40,35 @@ export default function Combinations({
         </>
       )}
 
-      <section className={styles.colourCombos}>
-        {contrastLevel === "Low" && !displayLowContrast
-          ? ""
-          : colorArray.map(
-              (
-                combo: [[RgbColor, HexColor], [RgbColor, HexColor], number],
-                index: number
-              ) => {
-                const backgroundRgb = combo[0][0].rgb;
-                const textRgb = combo[1][0].rgb;
-                const contrast = combo[2];
-                let paired: boolean = true; // true unless bg or text false
-                // Check if either background or text should be rendered
+      <section className={styles.contrastPairs}>
+        {
+          // By default, do not display low contrast combinations
+          contrastCategory === "Low" && !displayLowContrast
+            ? ""
+            : // Otherwise, for AAA, AA, and low (where user has chosen to display them), display contrast pairs
+              colorArray.map(
+                (
+                  pair: [[RgbColor, string], [RgbColor, string], number],
+                  index: number
+                ) => {
+                  const color1 = pair[0][0].rgb;
+                  const color2 = pair[1][0].rgb;
+                  const contrast = pair[2];
 
-                // Check if there is a next color combo
-                if (index + 1 < colorArray.length) {
-                  const nextCombo = colorArray[index + 1];
-                  const nextBackgroundRgb = nextCombo[0][0].rgb;
-                  const nextTextRgb = nextCombo[1][0].rgb;
-
-                  if (
-                    backgroundRgb === nextTextRgb &&
-                    textRgb === nextBackgroundRgb
-                  ) {
-                    paired = true;
-                  } else {
-                    paired = false;
-                  }
+                  return (
+                    <>
+                      <ContrastPair
+                        key={index}
+                        color1={`${color1}`}
+                        color2={`${color2}`}
+                        contrast={contrast}
+                        contrastCategory={contrastCategory}
+                      />
+                    </>
+                  );
                 }
-
-                return (
-                  <ColorCombo
-                    paired={paired}
-                    key={index}
-                    colour1={`${backgroundRgb}`}
-                    colour2={`${textRgb}`}
-                    contrast={contrast}
-                    contrastLevel={contrastLevel}
-                  />
-                );
-              }
-            )}
+              )
+        }
       </section>
     </section>
   );

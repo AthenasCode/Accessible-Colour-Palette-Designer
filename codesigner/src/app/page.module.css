@@ -66,9 +66,10 @@
   z-index: 10;
 }
 
-.colourCombos {
+.contrastPairs {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 1rem;
 }
 
@@ -80,7 +81,7 @@
   border-radius: 5%;
 }
 
-.colorCombinationDisplay {
+.colorCombination {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -91,12 +92,10 @@
   aspect-ratio: 1/1;
 }
 
-.colorCombinationPaired {
-  margin-right: 0;
-}
-
-.colorCombinationNotPaired {
-  margin-right: 0.5rem;
+.colorPair {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .contrast {

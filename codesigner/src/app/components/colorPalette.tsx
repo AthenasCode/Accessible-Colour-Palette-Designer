@@ -69,15 +69,6 @@ export default function ColorPalette({
       }
     }
 
-    // Swap background and text combinations (text becomes bg, bg becomes text)
-    combinations.map((combo) => {
-      const background = combo[0];
-      const text = combo[1];
-      const contrastValue = combo[2];
-
-      combinations.push([text, background, contrastValue]);
-    });
-
     // Sort combinations based on contrast
     combinations.sort((a, b) => b[2] - a[2]);
 

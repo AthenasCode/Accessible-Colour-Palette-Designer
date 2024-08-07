@@ -1,18 +1,14 @@
 import Combinations from "./combinations";
 import styles from "../page.module.css";
 
-interface HexColor {
-  color: string;
-}
-
 interface RgbColor {
   rgb: number[];
 }
 
 interface CombinationsSectionProps {
-  aaa: [[RgbColor, HexColor], [RgbColor, HexColor], number][];
-  aa: [[RgbColor, HexColor], [RgbColor, HexColor], number][];
-  lowContrast: [[RgbColor, HexColor], [RgbColor, HexColor], number][];
+  aaa: [[RgbColor, string], [RgbColor, string], number][];
+  aa: [[RgbColor, string], [RgbColor, string], number][];
+  lowContrast: [[RgbColor, string], [RgbColor, string], number][];
 }
 
 export default function CombinationsSection({
@@ -23,9 +19,9 @@ export default function CombinationsSection({
   return (
     <section className={styles.combinationsSection}>
       <h2>Contrasts</h2>
-      <Combinations contrastLevel={"AAA"} colorArray={aaa} />
-      <Combinations contrastLevel={"AA"} colorArray={aa} />
-      <Combinations contrastLevel={"Low"} colorArray={lowContrast} />
+      <Combinations contrastCategory={"AAA"} colorArray={aaa} />
+      <Combinations contrastCategory={"AA"} colorArray={aa} />
+      <Combinations contrastCategory={"Low"} colorArray={lowContrast} />
     </section>
   );
 }

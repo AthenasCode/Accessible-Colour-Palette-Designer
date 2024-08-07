@@ -5,23 +5,19 @@ import ColorPalette from "./components/colorPalette";
 import CombinationsSection from "./components/combinationsSection";
 import { useState } from "react";
 
-interface HexColor {
-  color: string;
-}
-
 interface RgbColor {
   rgb: number[];
 }
 
 export default function Home() {
   const [aaa, setAaa] = useState<
-    [[RgbColor, HexColor], [RgbColor, HexColor], number][]
+    [[RgbColor, string], [RgbColor, string], number][]
   >([]);
   const [aa, setAa] = useState<
-    [[RgbColor, HexColor], [RgbColor, HexColor], number][]
+    [[RgbColor, string], [RgbColor, string], number][]
   >([]);
   const [lowContrast, setLowContrast] = useState<
-    [[RgbColor, HexColor], [RgbColor, HexColor], number][]
+    [[RgbColor, string], [RgbColor, string], number][]
   >([]);
 
   return (
