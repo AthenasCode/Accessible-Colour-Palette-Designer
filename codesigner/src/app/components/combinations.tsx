@@ -5,14 +5,10 @@ import Description from "./description";
 
 interface HexColor {
   color: string;
-  background: boolean;
-  text: boolean;
 }
 
 interface RgbColor {
   rgb: number[];
-  background: boolean;
-  text: boolean;
 }
 
 interface CombinationsProps {
@@ -26,34 +22,27 @@ export default function Combinations({
 }: CombinationsProps) {
   const [displayLowContrast, setDisplayLowContrast] = useState(false);
 
-  const filteredArray = colorArray.filter((combo) => {
-    return combo[0][0].background && combo[1][0].text;
-  });
+  // const filteredArray = colorArray.filter((combo) => {
+  //   return combo[0][0].background && combo[1][0].text;
+  // });
 
   return (
     <section>
       {contrastLevel === "AAA" ? (
         <>
-          <h3>
-            AAA (Enhanced Contrast)
-            <Description contrastLevel={contrastLevel} />
-          </h3>
+          <h3>Enhanced (AAA)</h3>
         </>
       ) : contrastLevel === "AA" ? (
         <>
-          <h3>
-            AA (Minimum Contrast)
-            <Description contrastLevel={contrastLevel} />
-          </h3>
+          <h3>Minimum (AA)</h3>
         </>
       ) : (
         <>
           <h3>
-            Low Contrast
-            <Description contrastLevel={contrastLevel} />
+            Low
             <button onClick={() => setDisplayLowContrast((prev) => !prev)}>
               {!displayLowContrast
-                ? `Show ${filteredArray.length} combinations`
+                ? `Show ${colorArray.length} combinations`
                 : "Hide combinations"}
             </button>
           </h3>
@@ -63,22 +52,20 @@ export default function Combinations({
       <section className={styles.colourCombos}>
         {contrastLevel === "Low" && !displayLowContrast
           ? ""
-          : filteredArray.map(
+          : colorArray.map(
               (
                 combo: [[RgbColor, HexColor], [RgbColor, HexColor], number],
                 index: number
               ) => {
                 const backgroundRgb = combo[0][0].rgb;
                 const textRgb = combo[1][0].rgb;
-                const backgroundHex = combo[0][1].color;
-                const textHex = combo[1][1].color;
                 const contrast = combo[2];
                 let paired: boolean = true; // true unless bg or text false
                 // Check if either background or text should be rendered
 
                 // Check if there is a next color combo
-                if (index + 1 < filteredArray.length) {
-                  const nextCombo = filteredArray[index + 1];
+                if (index + 1 < colorArray.length) {
+                  const nextCombo = colorArray[index + 1];
                   const nextBackgroundRgb = nextCombo[0][0].rgb;
                   const nextTextRgb = nextCombo[1][0].rgb;
 
@@ -98,8 +85,6 @@ export default function Combinations({
                     key={index}
                     colour1={`${backgroundRgb}`}
                     colour2={`${textRgb}`}
-                    hex1={backgroundHex}
-                    hex2={textHex}
                     contrast={contrast}
                     contrastLevel={contrastLevel}
                   />

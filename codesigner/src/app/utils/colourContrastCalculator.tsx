@@ -5,8 +5,6 @@ const GAMMA = 2.4;
 
 interface RgbColor {
   rgb: number[];
-  background: boolean;
-  text: boolean;
 }
 
 function luminance(...args: number[]): number {

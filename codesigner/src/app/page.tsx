@@ -7,14 +7,10 @@ import { useState } from "react";
 
 interface HexColor {
   color: string;
-  background: boolean;
-  text: boolean;
 }
 
 interface RgbColor {
   rgb: number[];
-  background: boolean;
-  text: boolean;
 }
 
 export default function Home() {

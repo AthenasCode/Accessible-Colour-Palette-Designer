@@ -21,7 +21,9 @@
 }
 
 .paletteSection {
-  margin-bottom: 1rem;
+  width: max-content;
+  margin: 0 auto 1rem auto;
+  padding: 20px;
 }
 
 .colorPalette {
@@ -67,7 +69,6 @@
 .colourCombos {
   display: flex;
   flex-wrap: wrap;
-
   margin-bottom: 1rem;
 }
 

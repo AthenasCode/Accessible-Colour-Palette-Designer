@@ -8,6 +8,7 @@ import ChosenColour from "./chosenColour";
 import { useState } from "react";
 import styles from "../page.module.css";
 
+// SketchProps retrieved from https://uiwjs.github.io/react-color/
 export interface SketchProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "color"> {
   prefixCls?: string;
@@ -19,53 +20,29 @@ export interface SketchProps
   onChange?: (newShade: ColorResult) => void;
 }
 
-interface HexColor {
-  color: string;
-  background: boolean;
-  text: boolean;
-}
-
 interface ColorPickerProps {
   hex: string;
-  setHex: Dispatch<SetStateAction<HexColor>>;
-  excludeAsBackground: boolean;
-  excludeAsText: boolean;
+  setHex: Dispatch<SetStateAction<string>>;
 }
 
-export default function ColorPicker({
-  hex,
-  setHex,
-  excludeAsBackground,
-  excludeAsText,
-}: ColorPickerProps) {
+export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [inputValue, setInputValue] = useState(hex);
 
-  const checkBackgroundHandler = () => {
-    setHex((prev) => ({ ...prev, background: !prev.background }));
-  };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Updates the color of the color picker when user changes the hex input (if the input is valid)
+    const newValue = e.target.value.toUpperCase();
+    setInputValue(newValue);
 
-  const checkTextHandler = () => {
-    setHex((prev) => ({ ...prev, text: !prev.text }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Validate if the input is a valid hex code
-    if (/^#([0-9A-F]{3}){1,2}$/i.test(inputValue)) {
+    if (/^#([0-9A-F]{3}){1,2}$/i.test(newValue)) {
       // Process the valid hex code
-      setHex((prev) => ({ ...prev, color: inputValue }));
-    } else {
-      // Handle the case when the input is not a valid hex code
-      window.alert("Error: Invalid hex code");
-      setInputValue(hex);
+      setHex(newValue);
     }
   };
 
   return (
     <section className={styles.colorPickerSection}>
-      <ChosenColour color={hex} />
+      <ChosenColour color={hex} setDisplayColorPicker={setDisplayColorPicker} />
       <div
         className={styles.colorPicker}
         style={{ display: displayColorPicker ? "block" : "none" }}
@@ -73,42 +50,21 @@ export default function ColorPicker({
         <Sketch
           color={hex}
           onChange={(color) => {
-            setHex((prev) => ({ ...prev, color: color.hex }));
+            setHex(color.hex);
             setInputValue(color.hex);
           }}
           disableAlpha={true}
         />
       </div>
       <section className={styles.colourEditingTools}>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <label htmlFor="hexInput">
-            <input
-              id="hexInput"
-              type="text"
-              value={inputValue.toUpperCase()}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-        <button onClick={() => setDisplayColorPicker((prev) => !prev)}>
-          {displayColorPicker ? "Done" : "Edit with colour picker"}
-        </button>
-        <label htmlFor="">
+        <label htmlFor="hexInput">
           <input
-            type="checkbox"
-            checked={!excludeAsBackground}
-            onChange={checkBackgroundHandler}
+            id="hexInput"
+            maxLength={6}
+            type="text"
+            value={inputValue.toUpperCase()}
+            onChange={(e) => handleInputChange(e)}
           />
-          Exclude as background
-        </label>
-        <label htmlFor="">
-          <input
-            type="checkbox"
-            checked={!excludeAsText}
-            onChange={checkTextHandler}
-          />
-          Exclude as text
         </label>
       </section>
     </section>

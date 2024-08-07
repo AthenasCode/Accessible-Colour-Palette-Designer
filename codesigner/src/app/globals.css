@@ -73,6 +73,13 @@ ul {
   list-style: none;
 }
 
+button {
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
 /* p {
   margin: 10px 0;
 } */

@@ -5,30 +5,21 @@ import styles from "../page.module.css";
 import { useEffect, useState } from "react";
 import contrast from "../utils/colourContrastCalculator";
 import { hexToRgba } from "@uiw/color-convert";
-import Combinations from "./combinations";
 import { Dispatch, SetStateAction } from "react";
-
-interface HexColor {
-  color: string;
-  background: boolean;
-  text: boolean;
-}
 
 interface RgbColor {
   rgb: number[];
-  background: boolean;
-  text: boolean;
 }
 
 interface ColorPaletteProps {
   setAaa: Dispatch<
-    SetStateAction<[[RgbColor, HexColor], [RgbColor, HexColor], number][]>
+    SetStateAction<[[RgbColor, string], [RgbColor, string], number][]>
   >;
   setAa: Dispatch<
-    SetStateAction<[[RgbColor, HexColor], [RgbColor, HexColor], number][]>
+    SetStateAction<[[RgbColor, string], [RgbColor, string], number][]>
   >;
   setLowContrast: Dispatch<
-    SetStateAction<[[RgbColor, HexColor], [RgbColor, HexColor], number][]>
+    SetStateAction<[[RgbColor, string], [RgbColor, string], number][]>
   >;
 }
 
@@ -37,81 +28,42 @@ export default function ColorPalette({
   setAa,
   setLowContrast,
 }: ColorPaletteProps) {
-  const [colour1, setColour1] = useState<HexColor>({
-    color: "#ffd8c0",
-    background: true,
-    text: true,
-  });
-  const [colour2, setColour2] = useState<HexColor>({
-    color: "#f48d8f",
-    background: true,
-    text: true,
-  });
-  const [colour3, setColour3] = useState<HexColor>({
-    color: "#b06774",
-    background: true,
-    text: true,
-  });
-  const [colour4, setColour4] = useState<HexColor>({
-    color: "#564362",
-    background: true,
-    text: true,
-  });
-  const [colour5, setColour5] = useState<HexColor>({
-    color: "#2d4156",
-    background: true,
-    text: true,
-  });
-  const [colour6, setColour6] = useState<HexColor>({
-    color: "#171f25",
-    background: true,
-    text: true,
-  });
-  const [black, setBlack] = useState<HexColor>({
-    color: "#000000",
-    background: false,
-    text: false,
-  });
-  const [white, setWhite] = useState<HexColor>({
-    color: "#ffffff",
-    background: false,
-    text: false,
-  });
+  const [colour1, setColour1] = useState<string>("#ffd8c0");
+  const [colour2, setColour2] = useState<string>("#f48d8f");
+  const [colour3, setColour3] = useState<string>("#b06774");
+  const [colour4, setColour4] = useState<string>("#564362");
+  const [colour5, setColour5] = useState<string>("#2d4156");
+  const [colour6, setColour6] = useState<string>("#171f25");
 
   useEffect(() => {
-    // Convert hex to rgb:
-    const hexColours: HexColor[] = [
+    // Convert hex to rgb
+    const hexColours: string[] = [
       colour1,
       colour2,
       colour3,
       colour4,
       colour5,
       colour6,
-      black,
-      white,
     ];
 
     const rgbColours: RgbColor[] = [];
-    hexColours.map((colour) => {
-      const { r: r, g: g, b: b } = hexToRgba(colour.color);
+    hexColours.map((hex) => {
+      const { r: r, g: g, b: b } = hexToRgba(hex);
       const rgb = [r, g, b];
       rgbColours.push({
         rgb: rgb,
-        background: colour.background,
-        text: colour.text,
       });
     });
 
-    const combinations: [[RgbColor, HexColor], [RgbColor, HexColor], number][] =
-      [];
+    const combinations: [[RgbColor, string], [RgbColor, string], number][] = [];
 
     // Iterate over rgbColours, calculating contrasts
     for (let i = 0; i < rgbColours.length - 1; i++) {
       for (let j = i + 1; j < rgbColours.length; j++) {
-        const rgbBg: RgbColor = rgbColours[i]; // Object e.g. {rgb: [13, 22, 53], background: true, text: true}
+        const rgbBg: RgbColor = rgbColours[i]; // Object e.g. {rgb: [13, 22, 53]}
         const rgbTxt: RgbColor = rgbColours[j]; // next colour after i
-        const hexBg: HexColor = hexColours[i];
-        const hexTxt: HexColor = hexColours[j];
+        const hexBg: string = hexColours[i];
+        const hexTxt: string = hexColours[j];
         const contrastValue: number = contrast(rgbBg, rgbTxt);
         combinations.push([[rgbBg, hexBg], [rgbTxt, hexTxt], contrastValue]);
       }
@@ -136,99 +88,18 @@ export default function ColorPalette({
     setAaa(aaa);
     setAa(aa);
     setLowContrast(lowContrast);
-  }, [colour1, colour2, colour3, colour4, colour5, colour6, black, white]);
+  }, [colour1, colour2, colour3, colour4, colour5, colour6]);
 
   return (
     <section className={styles.paletteSection}>
       <section className={styles.colorPalette}>
-        <ColorPicker
-          hex={colour1.color}
-          setHex={setColour1}
-          excludeAsBackground={colour1.background}
-          excludeAsText={colour1.text}
-        />
-        <ColorPicker
-          hex={colour2.color}
-          setHex={setColour2}
-          excludeAsBackground={colour2.background}
-          excludeAsText={colour2.text}
-        />
-        <ColorPicker
-          hex={colour3.color}
-          setHex={setColour3}
-          excludeAsBackground={colour3.background}
-          excludeAsText={colour3.text}
-        />
-        <ColorPicker
-          hex={colour4.color}
-          setHex={setColour4}
-          excludeAsBackground={colour4.background}
-          excludeAsText={colour4.text}
-        />
-        <ColorPicker
-          hex={colour5.color}
-          setHex={setColour5}
-          excludeAsBackground={colour5.background}
-          excludeAsText={colour5.text}
-        />
-        <ColorPicker
-          hex={colour6.color}
-          setHex={setColour6}
-          excludeAsBackground={colour6.background}
-          excludeAsText={colour6.text}
-        />
-        {/* <section className={styles.blackWhiteToggle}>
-          <label htmlFor="black-text-toggle">
-            <input
-              id="black-text-toggle"
-              type="checkbox"
-              checked={black.text}
-              onChange={() =>
-                setBlack((prev) => ({ ...prev, text: !prev.text }))
-              }
-            />
-            Include black text
-          </label>
-          <label htmlFor="black-bg-toggle">
-            <input
-              id="black-bg-toggle"
-              type="checkbox"
-              checked={black.background}
-              onChange={() =>
-                setBlack((prev) => ({ ...prev, background: !prev.background }))
-              }
-            />
-            Include black background
-          </label>
-          <label htmlFor="white-text-toggle">
-            <input
-              id="white-text-toggle"
-              type="checkbox"
-              checked={white.text}
-              onChange={() =>
-                setWhite((prev) => ({ ...prev, text: !prev.text }))
-              }
-            />
-            Include white text
-          </label>
-          <label htmlFor="white-bg-toggle">
-            <input
-              id="white-bg-toggle"
-              type="checkbox"
-              checked={white.background}
-              onChange={() =>
-                setWhite((prev) => ({ ...prev, background: !prev.background }))
-              }
-            />
-            Include white background
-          </label>
-        </section> */}
+        <ColorPicker hex={colour1} setHex={setColour1} />
+        <ColorPicker hex={colour2} setHex={setColour2} />
+        <ColorPicker hex={colour3} setHex={setColour3} />
+        <ColorPicker hex={colour4} setHex={setColour4} />
+        <ColorPicker hex={colour5} setHex={setColour5} />
+        <ColorPicker hex={colour6} setHex={setColour6} />
       </section>
-      {/* <h3>Your colours:</h3>
-      <p>
-        {colour1.color}, {colour2.color}, {colour3.color}, {colour4.color},{" "}
-        {colour5.color}, {colour6.color}
-      </p> */}
     </section>
   );
 }

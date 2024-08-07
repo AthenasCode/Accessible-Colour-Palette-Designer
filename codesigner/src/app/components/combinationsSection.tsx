@@ -3,14 +3,10 @@ import styles from "../page.module.css";
 
 interface HexColor {
   color: string;
-  background: boolean;
-  text: boolean;
 }
 
 interface RgbColor {
   rgb: number[];
-  background: boolean;
-  text: boolean;
 }
 
 interface CombinationsSectionProps {
@@ -26,7 +22,7 @@ export default function CombinationsSection({
 }: CombinationsSectionProps) {
   return (
     <section className={styles.combinationsSection}>
-      <h2>Colour Combinations</h2>
+      <h2>Contrasts</h2>
       <Combinations contrastLevel={"AAA"} colorArray={aaa} />
       <Combinations contrastLevel={"AA"} colorArray={aa} />
       <Combinations contrastLevel={"Low"} colorArray={lowContrast} />
