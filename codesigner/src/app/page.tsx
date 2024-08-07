@@ -1,10 +1,9 @@
 "use client";
 
 import styles from "./page.module.css";
-import ColorPalette from "./components/colorPalette";
-import CombinationsSection from "./components/combinationsSection";
+import ContrastSection from "./components/contrastSection";
 import { useState } from "react";
-
+import Palette from "./components/palette";
 interface RgbColor {
   rgb: number[];
 }
@@ -22,12 +21,8 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <ColorPalette
-        setAaa={setAaa}
-        setAa={setAa}
-        setLowContrast={setLowContrast}
-      />
-      <CombinationsSection aaa={aaa} aa={aa} lowContrast={lowContrast} />
+      <Palette setAaa={setAaa} setAa={setAa} setLowContrast={setLowContrast} />
+      <ContrastSection aaa={aaa} aa={aa} lowContrast={lowContrast} />
     </main>
   );
 }

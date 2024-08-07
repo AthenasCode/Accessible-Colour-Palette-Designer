@@ -1,4 +1,4 @@
-import Combinations from "./combinations";
+import ContrastCategory from "./ContrastCategory";
 import styles from "../page.module.css";
 
 interface RgbColor {
@@ -11,17 +11,17 @@ interface CombinationsSectionProps {
   lowContrast: [[RgbColor, string], [RgbColor, string], number][];
 }
 
-export default function CombinationsSection({
+export default function ContrastSection({
   aaa,
   aa,
   lowContrast,
 }: CombinationsSectionProps) {
   return (
-    <section className={styles.combinationsSection}>
+    <section className={styles.contrastSection}>
       <h2>Contrasts</h2>
-      <Combinations contrastCategory={"AAA"} colorArray={aaa} />
-      <Combinations contrastCategory={"AA"} colorArray={aa} />
-      <Combinations contrastCategory={"Low"} colorArray={lowContrast} />
+      <ContrastCategory contrastCategory={"AAA"} colorArray={aaa} />
+      <ContrastCategory contrastCategory={"AA"} colorArray={aa} />
+      <ContrastCategory contrastCategory={"Low"} colorArray={lowContrast} />
     </section>
   );
 }

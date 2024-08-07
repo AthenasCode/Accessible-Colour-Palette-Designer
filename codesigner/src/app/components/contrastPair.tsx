@@ -1,6 +1,5 @@
 import styles from "../page.module.css";
 import ColorCombination from "./colorCombination";
-
 interface ColorComboProps {
   color1: string;
   color2: string;

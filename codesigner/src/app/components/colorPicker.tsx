@@ -4,7 +4,6 @@ import { Sketch } from "@uiw/react-color";
 import { Dispatch, SetStateAction } from "react";
 import { HsvaColor, ColorResult } from "@uiw/color-convert";
 import { SwatchPresetColor } from "@uiw/react-color-swatch";
-import ChosenColour from "./chosenColour";
 import { useState } from "react";
 import styles from "../page.module.css";
 
@@ -42,7 +41,11 @@ export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
 
   return (
     <section className={styles.colorPickerSection}>
-      <ChosenColour color={hex} setDisplayColorPicker={setDisplayColorPicker} />
+      <button
+        className={styles.colorDisplay}
+        style={{ backgroundColor: hex }}
+        onClick={() => setDisplayColorPicker((prev) => !prev)}
+      ></button>
       <div
         className={styles.colorPicker}
         style={{ display: displayColorPicker ? "block" : "none" }}
@@ -56,7 +59,7 @@ export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
           disableAlpha={true}
         />
       </div>
-      <section className={styles.colourEditingTools}>
+      <section className={styles.colorEditingTools}>
         <label htmlFor="hexInput">
           <input
             id="hexInput"

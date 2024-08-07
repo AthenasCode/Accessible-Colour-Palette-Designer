@@ -11,7 +11,7 @@ interface CombinationsProps {
   contrastCategory: string;
 }
 
-export default function Combinations({
+export default function ContrastCategory({
   colorArray,
   contrastCategory,
 }: CombinationsProps) {

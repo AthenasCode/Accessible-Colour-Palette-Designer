@@ -23,7 +23,7 @@ interface ColorPaletteProps {
   >;
 }
 
-export default function ColorPalette({
+export default function Palette({
   setAaa,
   setAa,
   setLowContrast,
