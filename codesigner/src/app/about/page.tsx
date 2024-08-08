@@ -23,19 +23,11 @@ export default function Home() {
         lucky, you will be able to read the low contrast text, but not everyone
         can.
       </p>
-      <div className={styles.contrastComparison}>
-        <Image
-          src="/images/low-contrast.png"
-          width={100}
-          height={100}
-          alt="Low contrast text"
-        />
-        <Image
-          src="/images/high-contrast.png"
-          width={100}
-          height={100}
-          alt="High contrast text"
-        />
+      <div className={styles.highContrast}>
+        <Image src="/images/high-contrast.png" fill alt="High contrast text" />
+      </div>
+      <div className={styles.lowContrast}>
+        <Image src="/images/low-contrast.png" fill alt="Low contrast text" />
       </div>
 
       <p>

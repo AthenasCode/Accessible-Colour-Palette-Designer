@@ -13,17 +13,23 @@ export default function ColorCombination({
   contrast,
   contrastCategory,
 }: ColorComboProps) {
+  // Check if the contrast is enough for large text
+  // Must be >4.5 for AAA large text
+  // Must be >3 for AA large text
   const largeText =
     (contrast > 4.5 && contrastCategory === "AAA") ||
     (contrast > 3 && contrastCategory === "AA")
-      ? "Large"
-      : "Normal";
+      ? "✓ Large"
+      : "✖ Large";
 
+  // Check if the contrast is enough for normal text
+  // Must be >7 for AAA normal text
+  // Must be >4.5 for AA normal text
   const normalText =
     (contrast > 7 && contrastCategory === "AAA") ||
     (contrast > 4.5 && contrastCategory === "AA")
-      ? "Normal"
-      : "";
+      ? "✓ Normal"
+      : "✖ Normal";
 
   return (
     <div

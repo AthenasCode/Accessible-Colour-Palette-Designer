@@ -148,8 +148,12 @@
   font-weight: 400;
 }
 
-.contrastComparison {
-  margin: 0 auto;
+.highContrast,
+.lowContrast {
+  position: relative;
+  width: 300px;
+  height: 100px;
+  object-fit: "contain";
 }
 
 .invalidHex {
