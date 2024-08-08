@@ -33,9 +33,10 @@ export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
     const newValue = e.target.value.toUpperCase();
     setInputValue(newValue);
 
-    if (/^#([0-9A-F]{3}){1,2}$/i.test(newValue)) {
+    if (/^([0-9A-F]{3}){1,2}$/i.test(newValue)) {
+      // Regex to validate that the input is a valid Hex code
       // Process the valid hex code
-      setHex(newValue);
+      setHex("#" + newValue);
     }
   };
 
@@ -43,7 +44,7 @@ export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
     <section className={styles.colorPickerSection}>
       <button
         className={styles.colorDisplay}
-        style={{ backgroundColor: hex }}
+        style={{ backgroundColor: "#" + hex }}
         onClick={() => setDisplayColorPicker((prev) => !prev)}
       ></button>
       <div
@@ -53,8 +54,9 @@ export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
         <Sketch
           color={hex}
           onChange={(color) => {
-            setHex(color.hex);
-            setInputValue(color.hex);
+            const code = color.hex.substring(1);
+            setHex(code);
+            setInputValue(code);
           }}
           disableAlpha={true}
         />
@@ -63,7 +65,8 @@ export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
         <label htmlFor="hexInput">
           <input
             id="hexInput"
-            maxLength={6}
+            className={styles.hexInput}
+            maxLength={7}
             type="text"
             value={inputValue.toUpperCase()}
             onChange={(e) => handleInputChange(e)}

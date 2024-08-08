@@ -28,12 +28,12 @@ export default function Palette({
   setAa,
   setLowContrast,
 }: ColorPaletteProps) {
-  const [color1, setColor1] = useState<string>("#ffd8c0");
-  const [color2, setColor2] = useState<string>("#f48d8f");
-  const [color3, setColor3] = useState<string>("#b06774");
-  const [color4, setColor4] = useState<string>("#564362");
-  const [color5, setColor5] = useState<string>("#2d4156");
-  const [color6, setColor6] = useState<string>("#171f25");
+  const [color1, setColor1] = useState<string>("ffd8c0");
+  const [color2, setColor2] = useState<string>("f48d8f");
+  const [color3, setColor3] = useState<string>("b06774");
+  const [color4, setColor4] = useState<string>("564362");
+  const [color5, setColor5] = useState<string>("2d4156");
+  const [color6, setColor6] = useState<string>("171f25");
 
   useEffect(() => {
     // Convert hex to rgb
@@ -48,6 +48,7 @@ export default function Palette({
 
     const rgbColors: RgbColor[] = [];
     hexColors.map((hex) => {
+      hex = "#" + hex;
       const { r: r, g: g, b: b } = hexToRgba(hex);
       const rgb = [r, g, b];
       rgbColors.push({
