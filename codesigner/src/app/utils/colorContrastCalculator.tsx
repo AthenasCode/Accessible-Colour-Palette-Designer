@@ -16,11 +16,11 @@ function luminance(...args: number[]): number {
 }
 
 export default function contrast(rgb1: RgbColor, rgb2: RgbColor): number {
-  const colour1 = rgb1.rgb;
-  const colour2 = rgb2.rgb;
+  const color1 = rgb1.rgb;
+  const color2 = rgb2.rgb;
 
-  var lum1 = luminance(...colour1);
-  var lum2 = luminance(...colour2);
+  var lum1 = luminance(...color1);
+  var lum2 = luminance(...color2);
   var brightest = Math.max(lum1, lum2);
   var darkest = Math.min(lum1, lum2);
   const contrast = (brightest + 0.05) / (darkest + 0.05);

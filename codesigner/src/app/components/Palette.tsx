@@ -1,9 +1,9 @@
 "use client";
 
-import ColorPicker from "./colorPicker";
+import ColorPicker from "./ColorPicker";
 import styles from "../page.module.css";
 import { useEffect, useState } from "react";
-import contrast from "../utils/colourContrastCalculator";
+import contrast from "../utils/colorContrastCalculator";
 import { hexToRgba } from "@uiw/color-convert";
 import { Dispatch, SetStateAction } from "react";
 
@@ -28,42 +28,42 @@ export default function Palette({
   setAa,
   setLowContrast,
 }: ColorPaletteProps) {
-  const [colour1, setColour1] = useState<string>("#ffd8c0");
-  const [colour2, setColour2] = useState<string>("#f48d8f");
-  const [colour3, setColour3] = useState<string>("#b06774");
-  const [colour4, setColour4] = useState<string>("#564362");
-  const [colour5, setColour5] = useState<string>("#2d4156");
-  const [colour6, setColour6] = useState<string>("#171f25");
+  const [color1, setColor1] = useState<string>("#ffd8c0");
+  const [color2, setColor2] = useState<string>("#f48d8f");
+  const [color3, setColor3] = useState<string>("#b06774");
+  const [color4, setColor4] = useState<string>("#564362");
+  const [color5, setColor5] = useState<string>("#2d4156");
+  const [color6, setColor6] = useState<string>("#171f25");
 
   useEffect(() => {
     // Convert hex to rgb
-    const hexColours: string[] = [
-      colour1,
-      colour2,
-      colour3,
-      colour4,
-      colour5,
-      colour6,
+    const hexColors: string[] = [
+      color1,
+      color2,
+      color3,
+      color4,
+      color5,
+      color6,
     ];
 
-    const rgbColours: RgbColor[] = [];
-    hexColours.map((hex) => {
+    const rgbColors: RgbColor[] = [];
+    hexColors.map((hex) => {
       const { r: r, g: g, b: b } = hexToRgba(hex);
       const rgb = [r, g, b];
-      rgbColours.push({
+      rgbColors.push({
         rgb: rgb,
       });
     });
 
     const combinations: [[RgbColor, string], [RgbColor, string], number][] = [];
 
-    // Iterate over rgbColours, calculating contrasts
-    for (let i = 0; i < rgbColours.length - 1; i++) {
-      for (let j = i + 1; j < rgbColours.length; j++) {
-        const rgbBg: RgbColor = rgbColours[i]; // Object e.g. {rgb: [13, 22, 53]}
-        const rgbTxt: RgbColor = rgbColours[j]; // next colour after i
-        const hexBg: string = hexColours[i];
-        const hexTxt: string = hexColours[j];
+    // Iterate over rgbColors, calculating contrasts
+    for (let i = 0; i < rgbColors.length - 1; i++) {
+      for (let j = i + 1; j < rgbColors.length; j++) {
+        const rgbBg: RgbColor = rgbColors[i]; // Object e.g. {rgb: [13, 22, 53]}
+        const rgbTxt: RgbColor = rgbColors[j]; // next color after i
+        const hexBg: string = hexColors[i];
+        const hexTxt: string = hexColors[j];
         const contrastValue: number = contrast(rgbBg, rgbTxt);
         combinations.push([[rgbBg, hexBg], [rgbTxt, hexTxt], contrastValue]);
       }
@@ -79,17 +79,17 @@ export default function Palette({
     setAaa(aaa);
     setAa(aa);
     setLowContrast(lowContrast);
-  }, [colour1, colour2, colour3, colour4, colour5, colour6]);
+  }, [color1, color2, color3, color4, color5, color6]);
 
   return (
     <section className={styles.paletteSection}>
       <section className={styles.colorPalette}>
-        <ColorPicker hex={colour1} setHex={setColour1} />
-        <ColorPicker hex={colour2} setHex={setColour2} />
-        <ColorPicker hex={colour3} setHex={setColour3} />
-        <ColorPicker hex={colour4} setHex={setColour4} />
-        <ColorPicker hex={colour5} setHex={setColour5} />
-        <ColorPicker hex={colour6} setHex={setColour6} />
+        <ColorPicker hex={color1} setHex={setColor1} />
+        <ColorPicker hex={color2} setHex={setColor2} />
+        <ColorPicker hex={color3} setHex={setColor3} />
+        <ColorPicker hex={color4} setHex={setColor4} />
+        <ColorPicker hex={color5} setHex={setColor5} />
+        <ColorPicker hex={color6} setHex={setColor6} />
       </section>
     </section>
   );

@@ -26,6 +26,13 @@
   padding: 20px;
 }
 
+.colorPalette button {
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
 .colorPalette {
   width: 100%;
   display: flex;
@@ -73,6 +80,10 @@
   margin-bottom: 1rem;
 }
 
+.contrastCategory {
+  margin-bottom: 32px;
+}
+
 .colorDisplay {
   width: 6rem;
   height: 6rem;
@@ -103,6 +114,10 @@
   position: absolute;
   bottom: 0.2rem;
   right: 0.2rem;
+}
+
+.displayLowContrast {
+  margin-left: 10px;
 }
 
 .largeText {

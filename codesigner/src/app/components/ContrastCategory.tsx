@@ -1,5 +1,5 @@
 import styles from "../page.module.css";
-import ContrastPair from "./contrastPair";
+import ContrastPair from "./ContrastPair";
 import { useState } from "react";
 
 interface RgbColor {
@@ -18,7 +18,7 @@ export default function ContrastCategory({
   const [displayLowContrast, setDisplayLowContrast] = useState(false);
 
   return (
-    <section>
+    <div className={styles.contrastCategory}>
       {contrastCategory === "AAA" ? (
         <>
           <h3>Enhanced (AAA)</h3>
@@ -31,7 +31,10 @@ export default function ContrastCategory({
         <>
           <h3>
             Low
-            <button onClick={() => setDisplayLowContrast((prev) => !prev)}>
+            <button
+              className={styles.displayLowContrast}
+              onClick={() => setDisplayLowContrast((prev) => !prev)}
+            >
               {!displayLowContrast
                 ? `Show ${colorArray.length} combinations`
                 : "Hide combinations"}
@@ -70,6 +73,6 @@ export default function ContrastCategory({
               )
         }
       </section>
-    </section>
+    </div>
   );
 }

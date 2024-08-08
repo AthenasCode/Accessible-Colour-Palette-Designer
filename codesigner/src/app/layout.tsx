@@ -10,9 +10,9 @@ import { usePathname } from "next/navigation";
 const capriola = Capriola({ weight: "400", subsets: ["latin"] });
 
 // export const metadata: Metadata = {
-//   title: "Accessible Colour Palette Designer",
+//   title: "Accessible Color Palette Designer",
 //   description:
-//     "A colour palette designer that calculates and displays colour contrasts.",
+//     "A color palette designer that calculates and displays color contrasts.",
 // };
 
 export default function RootLayout({

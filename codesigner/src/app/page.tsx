@@ -1,9 +1,9 @@
 "use client";
 
 import styles from "./page.module.css";
-import ContrastSection from "./components/contrastSection";
+import ContrastSection from "./components/ContrastSection";
 import { useState } from "react";
-import Palette from "./components/palette";
+import Palette from "./components/Palette";
 interface RgbColor {
   rgb: number[];
 }

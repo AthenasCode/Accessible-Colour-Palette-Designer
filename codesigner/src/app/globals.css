@@ -75,7 +75,9 @@ ul {
 }
 
 button {
-  background: none;
+  background: #d4d4d4;
+  padding: 2px 10px;
+  border-radius: 5px;
   border: none;
   outline: none;
   box-shadow: none;
