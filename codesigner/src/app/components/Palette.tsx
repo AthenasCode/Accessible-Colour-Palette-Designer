@@ -80,6 +80,8 @@ export default function Palette({
     setAaa(aaa);
     setAa(aa);
     setLowContrast(lowContrast);
+
+    // TODO: Save color palette to local storage or provide option to user to save.
   }, [color1, color2, color3, color4, color5, color6]);
 
   return (

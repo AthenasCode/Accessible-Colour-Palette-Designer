@@ -26,34 +26,35 @@ interface ColorPickerProps {
 }
 
 export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [displaySketch, setDisplaySketch] = useState(false);
   const [inputValue, setInputValue] = useState(hex);
+  const [invalidHex, setInvalidHex] = useState(false);
   const sketch = useRef<HTMLDivElement | null>(null);
 
   const clickOutsideSketch = (e: MouseEvent) => {
     // If sketch is displayed, sketch exists, and clicked element is outside sketch
     // "as Node" asserts that e.target is a Node so the contains method can be used
     if (
-      displayColorPicker &&
+      displaySketch &&
       sketch.current &&
       !sketch.current.contains(e.target as Node)
     ) {
-      setDisplayColorPicker(false);
+      setDisplaySketch(false);
     }
   };
 
   useEffect(() => {
-    // Add mousedown event listener when the component mounts or displayColorPicker changes
+    // Add mousedown event listener when the component mounts or displaySketch changes
     document.addEventListener("mousedown", clickOutsideSketch);
 
     // Cleanup function to remove the mousedown event listener when the component unmounts
-    // or before the effect runs again if displayColorPicker changes
+    // or before the effect runs again if displaySketch changes
     // This prevents potential memory leaks by ensuring the event listener is properly removed
-    // so it is not running and trying to update the ColorPicker state when, for example, we are on the about page
+    // so it is not running and trying to update the Sketch state when, for example, we are on the about page
     return () => {
       document.removeEventListener("mousedown", clickOutsideSketch);
     };
-  }, [displayColorPicker]);
+  }, [displaySketch]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Updates the color of the color picker when user changes the hex input (if the input is valid)
@@ -61,9 +62,11 @@ export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
     setInputValue(newValue);
 
     if (/^([0-9A-F]{3}){1,2}$/i.test(newValue)) {
-      // Regex to validate that the input is a valid Hex code
-      // Process the valid hex code
-      setHex("#" + newValue);
+      // Regex validates that the input is a valid Hex code
+      setHex(newValue);
+      setInvalidHex(false);
+    } else {
+      setInvalidHex(true);
     }
   };
 
@@ -72,11 +75,11 @@ export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
       <button
         className={styles.colorDisplay}
         style={{ backgroundColor: "#" + hex }}
-        onClick={() => setDisplayColorPicker((prev) => !prev)}
+        onClick={() => setDisplaySketch((prev) => !prev)}
       ></button>
       <div
         className={styles.colorPicker}
-        style={{ display: displayColorPicker ? "block" : "none" }}
+        style={{ display: displaySketch ? "block" : "none" }}
       >
         <Sketch
           color={hex}
@@ -93,11 +96,12 @@ export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
           <input
             id="hexInput"
             className={styles.hexInput}
-            maxLength={7}
+            maxLength={6}
             type="text"
             value={inputValue.toUpperCase()}
             onChange={(e) => handleInputChange(e)}
           />
+          {invalidHex && <div className={styles.invalidHex}>*Invalid hex</div>}
         </label>
       </section>
     </section>

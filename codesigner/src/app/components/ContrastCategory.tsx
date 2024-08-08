@@ -36,8 +36,8 @@ export default function ContrastCategory({
               onClick={() => setDisplayLowContrast((prev) => !prev)}
             >
               {!displayLowContrast
-                ? `Show ${colorArray.length} combinations`
-                : "Hide combinations"}
+                ? `(Click to show ${colorArray.length} combinations)`
+                : "(Click to hide combinations)"}
             </button>
           </h3>
         </>

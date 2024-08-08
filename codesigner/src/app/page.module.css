@@ -47,7 +47,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 6rem;
+  width: var(--cube-width);
 }
 
 .colorEditingTools {
@@ -85,8 +85,8 @@
 }
 
 .colorDisplay {
-  width: 6rem;
-  height: 6rem;
+  width: var(--cube-width);
+  height: var(--cube-width);
   aspect-ratio: 1/1;
   margin-right: 0.2rem;
   border-radius: 10px;
@@ -98,8 +98,8 @@
   gap: 0.2rem;
   padding: 0.5rem;
   position: relative;
-  width: 6rem;
-  height: 6rem;
+  width: var(--cube-width);
+  height: var(--cube-width);
   aspect-ratio: 1/1;
 }
 
@@ -150,4 +150,9 @@
 
 .contrastComparison {
   margin: 0 auto;
+}
+
+.invalidHex {
+  color: red;
+  font-size: small;
 }
