@@ -6,6 +6,7 @@ import { HsvaColor, ColorResult } from "@uiw/color-convert";
 import { SwatchPresetColor } from "@uiw/react-color-swatch";
 import { useState } from "react";
 import styles from "../page.module.css";
+import { useRef, useEffect } from "react";
 
 // SketchProps retrieved from https://uiwjs.github.io/react-color/
 export interface SketchProps
@@ -27,6 +28,32 @@ interface ColorPickerProps {
 export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [inputValue, setInputValue] = useState(hex);
+  const sketch = useRef<HTMLDivElement | null>(null);
+
+  const clickOutsideSketch = (e: MouseEvent) => {
+    // If sketch is displayed, sketch exists, and clicked element is outside sketch
+    // "as Node" asserts that e.target is a Node so the contains method can be used
+    if (
+      displayColorPicker &&
+      sketch.current &&
+      !sketch.current.contains(e.target as Node)
+    ) {
+      setDisplayColorPicker(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add mousedown event listener when the component mounts or displayColorPicker changes
+    document.addEventListener("mousedown", clickOutsideSketch);
+
+    // Cleanup function to remove the mousedown event listener when the component unmounts
+    // or before the effect runs again if displayColorPicker changes
+    // This prevents potential memory leaks by ensuring the event listener is properly removed
+    // so it is not running and trying to update the ColorPicker state when, for example, we are on the about page
+    return () => {
+      document.removeEventListener("mousedown", clickOutsideSketch);
+    };
+  }, [displayColorPicker]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Updates the color of the color picker when user changes the hex input (if the input is valid)
@@ -41,7 +68,7 @@ export default function ColorPicker({ hex, setHex }: ColorPickerProps) {
   };
 
   return (
-    <section className={styles.colorPickerSection}>
+    <section ref={sketch} className={styles.colorPickerSection}>
       <button
         className={styles.colorDisplay}
         style={{ backgroundColor: "#" + hex }}
