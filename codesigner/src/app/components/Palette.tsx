@@ -74,7 +74,7 @@ export default function Palette({
     combinations.sort((a, b) => b[2] - a[2]);
 
     const aaa = combinations.filter((c) => c[2] >= 4.5);
-    const aa = combinations.filter((c) => c[2] < 4.5 && c[2] >= 3);
+    const aa = combinations.filter((c) => c[2] < 4.6 && c[2] >= 3);
     const lowContrast = combinations.filter((c) => c[2] < 3);
 
     setAaa(aaa);
