@@ -151,12 +151,21 @@
 .highContrast,
 .lowContrast {
   position: relative;
-  width: 300px;
-  height: 100px;
+  width: 400px;
+  height: 200px;
   object-fit: "contain";
+}
+
+.contrastComparison {
+  display: flex;
+  margin: 20px auto;
 }
 
 .invalidHex {
   color: red;
   font-size: small;
 }
+
+/* Bg: 552433
+Large: F48D8F
+Normal: FFD8C0 */

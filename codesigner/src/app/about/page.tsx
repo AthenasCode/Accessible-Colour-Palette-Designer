@@ -19,15 +19,23 @@ export default function Home() {
       <p>
         Low contrast between text and background makes it very difficult to read
         the text. Here's a visual example: on the left is a low contrast
-        combination, and on the right is a high contrast combination. If you're
-        lucky, you will be able to read the low contrast text, but not everyone
-        can.
+        combination, and on the right is a high contrast combination.
       </p>
-      <div className={styles.highContrast}>
-        <Image src="/images/high-contrast.png" fill alt="High contrast text" />
-      </div>
-      <div className={styles.lowContrast}>
-        <Image src="/images/low-contrast.png" fill alt="Low contrast text" />
+      <div className={styles.contrastComparison}>
+        <div className={styles.highContrast}>
+          <Image
+            src="/images/high-contrast.png"
+            fill
+            alt="High contrast color combination"
+          />
+        </div>
+        <div className={styles.lowContrast}>
+          <Image
+            src="/images/low-contrast.png"
+            fill
+            alt="Low contrast color combination"
+          />
+        </div>
       </div>
 
       <p>
