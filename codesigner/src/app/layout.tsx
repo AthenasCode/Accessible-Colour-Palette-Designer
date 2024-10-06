@@ -26,8 +26,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={capriola.className}>
         <header className={styles.header}>
-          <h1 className={styles.title}>acpd</h1>
           <nav className={styles.nav}>
+            <h1 className={styles.title}>Contrast Calculator</h1>
             <ul>
               <li>
                 <Link

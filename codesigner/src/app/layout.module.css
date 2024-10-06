@@ -1,5 +1,5 @@
 .header {
-  width: 80vw;
+  max-width: var(--max-width);
   margin: 0 auto 40px auto;
 }
 
@@ -9,8 +9,14 @@
   margin: 40px 0;
 }
 
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
 .nav ul {
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 32px;
 }

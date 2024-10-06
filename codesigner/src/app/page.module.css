@@ -10,11 +10,9 @@
 }
 
 .main {
-  max-width: 1200px;
-  width: 80vw;
+  max-width: var(--max-width);
   display: flex;
   flex-direction: column;
-  align-items: left;
   padding: 2rem;
   min-height: 100vh;
   margin: auto;
@@ -39,7 +37,6 @@
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
@@ -89,7 +86,6 @@
   height: var(--cube-width);
   aspect-ratio: 1/1;
   margin-right: 0.2rem;
-  border-radius: 10px;
 }
 
 .colorCombination {
@@ -105,7 +101,6 @@
 
 .colorPair {
   display: flex;
-  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -132,7 +127,6 @@
 .nonText {
   width: 10%;
   min-width: 10px;
-  border-radius: 50%;
   background-color: white;
 }
 
@@ -164,6 +158,10 @@
 .invalidHex {
   color: red;
   font-size: small;
+}
+
+.contrastSection p {
+  margin: 0;
 }
 
 /* Bg: 552433

@@ -16,6 +16,7 @@ export default function Home() {
         provide color contrast success criterion to assist designers and
         developers in this regard.
       </p>
+
       <p>
         Low contrast between text and background makes it very difficult to read
         the text. Here's a visual example: on the left is a low contrast
